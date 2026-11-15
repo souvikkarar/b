@@ -44,6 +44,7 @@ export const Footer: React.FC<FooterProps> = ({
     { id: 'home', labelEn: 'Home', labelBn: 'প্রথম পাতা' },
     { id: 'about', labelEn: 'About Us', labelBn: 'আমাদের কথা' },
     { id: 'heritage', labelEn: 'Cultural Heritage', labelBn: 'সাংস্কৃতিক ঐতিহ্য' },
+    { id: 'legends', labelEn: 'Our Legends', labelBn: 'স্মরণীয় ব্যক্তিত্ব' },
     { id: 'contact', labelEn: 'Contact & Offices', labelBn: 'যোগাযোগ ও কার্যালয়' },
   ];
 

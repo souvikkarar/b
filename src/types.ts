@@ -2,12 +2,14 @@ export type PageId =
   | 'home' 
   | 'about' 
   | 'heritage'
+  | 'legends'
   | 'contact';
 
 export const PAGE_ROUTES: Record<PageId, string> = {
   home: '/',
   about: '/about',
   heritage: '/heritage',
+  legends: '/legends',
   contact: '/contact',
 };
 
@@ -15,8 +17,15 @@ export const ROUTE_TO_PAGE: Record<string, PageId> = {
   '/': 'home',
   '/about': 'about',
   '/heritage': 'heritage',
+  '/legends': 'legends',
   '/contact': 'contact',
 };
+
+/** True when a URL hash is a legacy page link like #about (not an in-page anchor like #gopinath-saha). */
+export function isLegacyPageHash(hash: string): boolean {
+  const cleaned = hash.replace(/^#\/?/, '').trim().toLowerCase();
+  return cleaned.length > 0 && cleaned in PAGE_ROUTES;
+}
 
 export function getPageFromPath(pathname: string, hash?: string): PageId {
   // Support legacy hash if present (e.g., /#about, #about, /#/about)

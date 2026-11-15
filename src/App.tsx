@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
-import { PageId, PAGE_ROUTES, getPageFromPath } from './types';
+import { PageId, PAGE_ROUTES, getPageFromPath, isLegacyPageHash } from './types';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomeView } from './components/HomeView';
 import { AboutView } from './components/AboutView';
 import { CulturalHeritageView } from './components/CulturalHeritageView';
+import { LegendsView } from './components/LegendsView';
 import { ContactView } from './components/ContactView';
 
 function MainApp() {
@@ -16,8 +17,9 @@ function MainApp() {
 
   // Sync path-based routing with browser window location & history
   useEffect(() => {
-    // If arriving with a legacy hash (e.g. /#about or #about), migrate cleanly to /about
-    if (window.location.hash) {
+    // If arriving with a legacy hash (e.g. /#about or #about), migrate cleanly to /about.
+    // In-page anchors such as /legends#gopinath-saha are left alone.
+    if (window.location.hash && isLegacyPageHash(window.location.hash)) {
       const pageFromHash = getPageFromPath(window.location.pathname, window.location.hash);
       const targetPath = PAGE_ROUTES[pageFromHash] || '/';
       window.history.replaceState({ page: pageFromHash }, '', targetPath);
@@ -50,6 +52,10 @@ function MainApp() {
       heritage: {
         en: 'Cultural Heritage & History | Bangiya Saha Samity',
         bn: 'সাংস্কৃতিক ঐতিহ্য ও ইতিবৃত্ত | বঙ্গীয় সাহা সমিতি',
+      },
+      legends: {
+        en: 'Our Legends — Pioneers of the Sunri Community | Bangiya Saha Samity',
+        bn: 'স্মরণীয় ব্যক্তিত্ব — শুঁড়ি সমাজের পথপ্রদর্শক | বঙ্গীয় সাহা সমিতি',
       },
       contact: {
         en: 'Contact Us & Central Office | Bangiya Saha Samity',
@@ -87,6 +93,8 @@ function MainApp() {
         {activePage === 'about' && <AboutView onNavigate={navigateTo} />}
 
         {activePage === 'heritage' && <CulturalHeritageView onNavigate={navigateTo} />}
+
+        {activePage === 'legends' && <LegendsView onNavigate={navigateTo} />}
 
         {activePage === 'contact' && (
           <ContactView />
