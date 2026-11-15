@@ -128,7 +128,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onDonateClick })
 
             {/* Right: Grounded Photo & Institutional Badge (Sticky within column) */}
             <div className="lg:col-span-5 relative">
-              <div className="lg:sticky lg:top-8 w-full max-w-[340px] sm:max-w-[360px] mx-auto lg:ml-auto">
+              <div className="lg:sticky lg:top-32 w-full max-w-[340px] sm:max-w-[360px] mx-auto lg:ml-auto">
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20 bg-blue-900">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img
