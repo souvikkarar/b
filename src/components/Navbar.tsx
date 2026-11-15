@@ -94,9 +94,10 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
 
   const inlineItems = NAV_ITEMS;
 
+  // EN / বাংলা capsule on the white bar: beside the nav on lg+, beside the menu button below lg.
   const LanguageSwitch: React.FC = () => (
     <div
-      className="inline-flex items-center rounded-full bg-white/10 ring-1 ring-inset ring-white/20 p-0.5 text-[11px] sm:text-xs font-semibold"
+      className="inline-flex items-center rounded-full p-0.5 font-semibold ring-1 ring-inset bg-slate-100 ring-slate-200 text-[11px] min-[380px]:text-xs shrink-0"
       role="group"
       aria-label={isBengali ? 'ভাষা নির্বাচন' : 'Language selection'}
     >
@@ -108,8 +109,8 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
             onClick={() => setLang(code)}
             aria-pressed={active}
             title={code === 'en' ? 'English' : 'বাংলা'}
-            className={`px-2.5 py-0.5 rounded-full leading-5 cursor-pointer transition-colors ${
-              active ? 'bg-white text-blue-950 shadow-sm' : 'text-blue-200 hover:text-white'
+            className={`rounded-full cursor-pointer transition-colors px-2 min-[380px]:px-2.5 py-1 leading-5 whitespace-nowrap ${
+              active ? 'bg-blue-950 text-white shadow-sm' : 'text-slate-600 hover:text-blue-950'
             }`}
           >
             {code === 'en' ? 'EN' : 'বাংলা'}
@@ -135,8 +136,8 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
             </span>
           </p>
 
-          {/* Line 2 (mobile/tablet): phone numbers + language capsule */}
-          <div className="flex items-center gap-4 sm:gap-5 w-full lg:w-auto justify-between lg:justify-end py-1.5 lg:py-0 shrink-0">
+          {/* Line 2 (mobile/tablet): phone numbers. On lg+ the language capsule sits here too. */}
+          <div className="flex items-center gap-4 sm:gap-5 w-full lg:w-auto justify-start lg:justify-end py-1.5 lg:py-0 shrink-0">
             <div className="flex items-center gap-2 min-w-0">
               <Phone className="w-3.5 h-3.5 text-orange-500 shrink-0" aria-hidden="true" />
               <a href={PHONE_LANDLINE.href} className="hover:text-white transition-colors whitespace-nowrap">
@@ -147,8 +148,6 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
                 {isBengali ? PHONE_MOBILE.displayBn : PHONE_MOBILE.display}
               </a>
             </div>
-            <span className="hidden lg:block h-3.5 w-px bg-blue-200/25" aria-hidden="true" />
-            <LanguageSwitch />
           </div>
         </div>
       </div>
@@ -159,7 +158,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
           scrolled || menuOpen ? 'shadow-[0_2px_12px_rgba(15,23,42,0.08)]' : ''
         } border-b border-slate-200`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[68px] sm:h-[76px] flex items-center justify-between gap-2 min-[380px]:gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[68px] py-2 sm:py-0 sm:h-[76px] flex items-center justify-between gap-2 min-[380px]:gap-4">
           {/* Emblem + name */}
           <a
             href={PAGE_ROUTES.home}
@@ -169,11 +168,11 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
           >
             <TreeLogo className="w-10 h-10 min-[380px]:w-11 min-[380px]:h-11 sm:w-13 sm:h-13 rounded-full" />
             <div className="min-w-0 border-l border-slate-200 pl-2 min-[380px]:pl-3">
-              <div className="font-serif-heading font-bold text-blue-950 leading-tight text-[14px] min-[350px]:text-[15px] min-[380px]:text-base sm:text-xl whitespace-nowrap">
+              <div className="font-serif-heading font-bold text-blue-950 leading-tight text-[14px] min-[350px]:text-[15px] min-[380px]:text-base sm:text-xl text-balance sm:whitespace-nowrap">
                 {isBengali ? 'বঙ্গীয় সাহা সমিতি' : 'Bangiya Saha Samity'}
               </div>
               <div className="flex flex-wrap items-center gap-x-1.5 text-[11px] sm:text-xs text-slate-500 leading-snug mt-0.5">
-                <span className="whitespace-nowrap">{isBengali ? 'পশ্চিমবঙ্গ, শুঁড়ি সমাজ' : 'West Bengal, Sunri Samaj'}</span>
+                <span className="min-[360px]:whitespace-nowrap">{isBengali ? 'পশ্চিমবঙ্গ, শুঁড়ি সমাজ' : 'West Bengal, Sunri Samaj'}</span>
                 <span className="whitespace-nowrap">
                   <span className="text-orange-500 mr-1.5" aria-hidden="true">•</span>
                   {isBengali ? 'স্থাপিত ১৯৩৬–৩৭' : 'Est. 1936–37'}
@@ -182,7 +181,8 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
             </div>
           </a>
 
-          {/* Inline navigation (laptop & desktop, lg+) */}
+          {/* Right side: inline nav (lg+), language capsule (all sizes), menu toggle (below lg) */}
+          <div className="flex items-center gap-2 lg:gap-3 xl:gap-4 shrink-0">
           <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1" aria-label={isBengali ? 'প্রধান সূচিপত্র' : 'Main navigation'}>
             {inlineItems.map((item) => {
               const active = activePage === item.id;
@@ -208,23 +208,25 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
             })}
           </nav>
 
-          {/* Menu toggle (tablet & mobile only) */}
-          <button
-            onClick={() => setMenuOpen((v) => !v)}
-            className={`lg:hidden inline-flex items-center gap-2 h-10 px-3 rounded-md border text-sm font-semibold shrink-0 cursor-pointer transition-colors ${
-              menuOpen
-                ? 'bg-blue-950 border-blue-950 text-white'
-                : 'bg-white border-slate-300 text-blue-950 hover:bg-slate-50'
-            }`}
-            aria-expanded={menuOpen}
-            aria-controls="site-menu"
-            aria-label={isBengali ? 'মেনু' : 'Toggle navigation menu'}
-          >
-            {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            <span className="hidden min-[400px]:inline">
-              {menuOpen ? (isBengali ? 'বন্ধ' : 'Close') : isBengali ? 'মেনু' : 'Menu'}
-            </span>
-          </button>
+            <LanguageSwitch />
+            <button
+              onClick={() => setMenuOpen((v) => !v)}
+              className={`lg:hidden inline-flex items-center justify-center w-10 h-10 rounded-md border shrink-0 cursor-pointer transition-colors ${
+                menuOpen
+                  ? 'bg-blue-950 border-blue-950 text-white'
+                  : 'bg-white border-slate-300 text-blue-950 hover:bg-slate-50'
+              }`}
+              aria-expanded={menuOpen}
+              aria-controls="site-menu"
+              aria-label={
+                menuOpen
+                  ? isBengali ? 'মেনু বন্ধ করুন' : 'Close menu'
+                  : isBengali ? 'মেনু খুলুন' : 'Open menu'
+              }
+            >
+              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
 
         {/* Dropdown menu (tablet & mobile only) */}
