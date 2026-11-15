@@ -6,21 +6,13 @@ import { Footer } from './components/Footer';
 import { HomeView } from './components/HomeView';
 import { AboutView } from './components/AboutView';
 import { CulturalHeritageView } from './components/CulturalHeritageView';
-import { MembershipView } from './components/MembershipView';
-import { EventsActivitiesView } from './components/EventsActivitiesView';
-import { NewsUpdatesView } from './components/NewsUpdatesView';
-import { GalleryView } from './components/GalleryView';
-import { DonateSupportView } from './components/DonateSupportView';
 import { ContactView } from './components/ContactView';
-import { DonationModal } from './components/DonationModal';
 
 function MainApp() {
   const { isBengali } = useLanguage();
   const [activePage, setActivePage] = useState<PageId>(() => {
     return getPageFromPath(window.location.pathname, window.location.hash);
   });
-  const [donationModalOpen, setDonationModalOpen] = useState(false);
-  const [donationCause, setDonationCause] = useState<string>('Student Hostel, Guest Room & Social Help for Educational Purpose (Only for Our Community)');
 
   // Sync path-based routing with browser window location & history
   useEffect(() => {
@@ -59,26 +51,6 @@ function MainApp() {
         en: 'Cultural Heritage & History | Bangiya Saha Samity',
         bn: 'সাংস্কৃতিক ঐতিহ্য ও ইতিবৃত্ত | বঙ্গীয় সাহা সমিতি',
       },
-      membership: {
-        en: 'Membership Application Form | Bangiya Saha Samity',
-        bn: 'সদস্যপদ আবেদন ফরম | বঙ্গীয় সাহা সমিতি',
-      },
-      events: {
-        en: 'Events, Conventions & Activities | Bangiya Saha Samity',
-        bn: 'কর্মসূচি ও সম্মেলন | বঙ্গীয় সাহা সমিতি',
-      },
-      news: {
-        en: 'News, Notices & Press Releases | Bangiya Saha Samity',
-        bn: 'সংবাদ ও বিজ্ঞপ্তি | বঙ্গীয় সাহা সমিতি',
-      },
-      gallery: {
-        en: 'Photo & Video Gallery | Bangiya Saha Samity',
-        bn: 'চিত্রসম্ভার ও ভিডিও | বঙ্গীয় সাহা সমিতি',
-      },
-      donate: {
-        en: 'Donate & Support | Bangiya Saha Samity',
-        bn: 'অনুদান ও সহায়তা | বঙ্গীয় সাহা সমিতি',
-      },
       contact: {
         en: 'Contact Us & Central Office | Bangiya Saha Samity',
         bn: 'যোগাযোগ ও কেন্দ্রীয় কার্যালয় | বঙ্গীয় সাহা সমিতি',
@@ -100,77 +72,21 @@ function MainApp() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleOpenDonateModal = (cause?: string) => {
-    if (cause) {
-      setDonationCause(cause);
-    }
-    setDonationModalOpen(true);
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-orange-500 selection:text-white">
       {/* Sticky White & Blue Header with Saffron Accents */}
       <Navbar
         activePage={activePage}
         onNavigate={navigateTo}
-        onDonateClick={() => handleOpenDonateModal()}
       />
 
       {/* Dynamic View Display */}
       <main className="flex-grow">
-        {activePage === 'home' && (
-          <HomeView
-            onNavigate={navigateTo}
-            onDonateClick={handleOpenDonateModal}
-          />
-        )}
+        {activePage === 'home' && <HomeView onNavigate={navigateTo} />}
 
-        {activePage === 'about' && (
-          <AboutView
-            onNavigate={navigateTo}
-            onDonateClick={handleOpenDonateModal}
-            onLegalAidClick={() => handleOpenDonateModal('Legal Aid & SC Rights Protection')}
-          />
-        )}
+        {activePage === 'about' && <AboutView onNavigate={navigateTo} />}
 
-        {activePage === 'heritage' && (
-          <CulturalHeritageView
-            onNavigate={navigateTo}
-            onDonateClick={handleOpenDonateModal}
-          />
-        )}
-
-        {activePage === 'membership' && (
-          <MembershipView
-            onNavigate={navigateTo}
-          />
-        )}
-
-        {activePage === 'events' && (
-          <EventsActivitiesView
-            onNavigate={navigateTo}
-            onDonateClick={handleOpenDonateModal}
-          />
-        )}
-
-        {activePage === 'news' && (
-          <NewsUpdatesView
-            onNavigate={navigateTo}
-          />
-        )}
-
-        {activePage === 'gallery' && (
-          <GalleryView
-            onNavigate={navigateTo}
-          />
-        )}
-
-        {activePage === 'donate' && (
-          <DonateSupportView
-            onNavigate={navigateTo}
-            onDonateClick={handleOpenDonateModal}
-          />
-        )}
+        {activePage === 'heritage' && <CulturalHeritageView onNavigate={navigateTo} />}
 
         {activePage === 'contact' && (
           <ContactView />
@@ -181,14 +97,6 @@ function MainApp() {
       <Footer
         activePage={activePage}
         onNavigate={navigateTo}
-        onDonateClick={() => handleOpenDonateModal()}
-      />
-
-      {/* Interactive Donation Modal */}
-      <DonationModal
-        isOpen={donationModalOpen}
-        onClose={() => setDonationModalOpen(false)}
-        initialCause={donationCause}
       />
     </div>
   );

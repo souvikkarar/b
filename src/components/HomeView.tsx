@@ -5,10 +5,8 @@ import {
   GraduationCap, 
   Building2, 
   Sparkles, 
-  ArrowRight, 
-  Calendar, 
-  Newspaper, 
-  ShieldCheck, 
+  ArrowRight,
+  ShieldCheck,
   CheckCircle2, 
   Award, 
   ChevronRight,
@@ -17,19 +15,16 @@ import {
 import { useLanguage } from '../context/LanguageContext';
 import { TRANSLATIONS } from '../data/translations';
 import { 
-  KEY_ACTIVITIES, 
-  UPCOMING_EVENTS, 
-  LATEST_NEWS_UPDATES 
+  KEY_ACTIVITIES
 } from '../data/ngoData';
 import { IndianPatternDivider } from './IndianPatternDivider';
 import { PageId, PAGE_ROUTES } from '../types';
 
 interface HomeViewProps {
   onNavigate: (page: PageId) => void;
-  onDonateClick: () => void;
 }
 
-export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onDonateClick }) => {
+export const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
   const { lang, isBengali } = useLanguage();
   const t = TRANSLATIONS[lang];
 
@@ -70,7 +65,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onDonateClick })
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-blue-100/80 pt-1">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-orange-400 shrink-0" />
-                  <span>{isBengali ? '৭৭ মানিকতলা স্ট্রিটে শুভ প্রতিষ্ঠা (১৯৩৪)' : 'Founded 1934 at 77 Manicktala St (Simla)'}</span>
+                  <span>{isBengali ? '৭৭ মানিকতলা স্ট্রিট (সিমলা), ওঁ জগৎ জননী মন্দিরের পাশে শুভ প্রতিষ্ঠা (১৯৩৪)' : 'Founded 1934 at 77 Maniktala St (Simla), beside Jagat Janani Temple'}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-orange-400 shrink-0" />
@@ -89,20 +84,6 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onDonateClick })
               {/* Requested Buttons: Become a Member & Contact Us + Donate */}
               <div className="flex flex-wrap items-center gap-4 pt-4">
                 <a
-                  id="hero-become-member-btn"
-                  href={PAGE_ROUTES.membership}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onNavigate('membership');
-                  }}
-                  className="px-6 py-3.5 rounded-xl font-bold text-sm sm:text-base text-white bg-orange-600 hover:bg-orange-500 shadow-md hover:shadow-lg transition-all flex items-center gap-2 active:scale-[0.98] border border-orange-400"
-                >
-                  <Users className="w-4 h-4" />
-                  <span>{isBengali ? 'সদস্য হন' : 'Become a Member'}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-
-                <a
                   id="hero-contact-us-btn"
                   href={PAGE_ROUTES.contact}
                   onClick={(e) => {
@@ -114,21 +95,12 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onDonateClick })
                   <Phone className="w-4 h-4 text-orange-400" />
                   <span>{isBengali ? 'যোগাযোগ করুন' : 'Contact Us'}</span>
                 </a>
-
-                <button
-                  id="hero-donate-btn"
-                  onClick={onDonateClick}
-                  className="px-5 py-3.5 rounded-xl font-semibold text-sm sm:text-base text-amber-200 hover:text-white border border-amber-400/40 hover:border-amber-400 transition-colors flex items-center gap-1.5 cursor-pointer"
-                >
-                  <HeartHandshake className="w-4 h-4 text-orange-400" />
-                  <span>{isBengali ? 'সহায়তা ও অনুদান' : 'Donate / Support'}</span>
-                </button>
               </div>
             </div>
 
             {/* Right: Grounded Photo & Institutional Badge (Sticky within column) */}
             <div className="lg:col-span-5 relative">
-              <div className="lg:sticky lg:top-32 w-full max-w-[340px] sm:max-w-[360px] mx-auto lg:ml-auto">
+              <div className="lg:sticky lg:top-28 w-full max-w-[340px] sm:max-w-[360px] mx-auto lg:ml-auto">
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white/20 bg-blue-900">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img
@@ -177,7 +149,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onDonateClick })
               <p className="text-slate-700 leading-relaxed text-base">
                 {isBengali 
                   ? 'বঙ্গীয় সাহা সমিতি (শুঁড়ি সমাজ) ১৯৩৪ সালে কলকাতার ৭৭ মানিকতলা স্ট্রিটের (সিমলা) মা জগৎ জননী মন্দিরে সমাজের বিশিষ্ট ব্যক্তিবর্গের উদ্যোগে প্রতিষ্ঠিত হয় এবং ১৯৩৬-৩৭ সালে বিধিবদ্ধভাবে নিবন্ধিত হয় (নিবন্ধন নং ৪৫২২)। ১৯৫০ সালে বাবাসাহেব ড. বি. আর. আম্বেদকর ভারতের সংবিধানে শুঁড়ি সম্প্রদায়কে তপশিলি জাতি হিসেবে অন্তর্ভুক্ত করেন। ১৯৫৬ সালে ৫২বি ইন্ডিয়ান মিরর স্ট্রিটে নিজস্ব জমিতে ৪ তলা কেন্দ্রীয় কার্যালয় নির্মিত হয়, যেখানে বর্তমানে ৫০ জন গ্রামীণ শিক্ষার্থীর জন্য ছাত্রাবাসের আবাসিক ব্যবস্থা করা হয় (২০১৮ সালে ছাত্রীদের পৃথক শাখা চালু হয়) এবং সমাজের সদস্যদের জন্য অতিথি কক্ষের (Guest Room) সুবিধাও রয়েছে।'
-                  : 'Bangiya Saha Samity (Sunri Samaj) was established in 1934 at Maa Jagat Janani Temple, 77 Manicktala Street, Kolkata (Simla) by distinguished community leaders, and formally incorporated under Registration No. 4522 of 1936–37. In 1950, Babasaheb Dr. B. R. Ambedkar enshrined the Sunri community in the Constitution of India as a Scheduled Caste. In 1956, our four-storeyed Central Office was purchased and erected at 52B Indian Mirror Street, where residential hostel arrangements are made for up to 50 students (with a dedicated female wing introduced in 2018) alongside a Guest Room facility for community members.'}
+                  : 'Bangiya Saha Samity (Sunri Samaj) was established in 1934 at Maa Jagat Janani Temple, 77 Maniktala Street, Kolkata (Simla) by distinguished community leaders, and formally incorporated under Registration No. 4522 of 1936–37. In 1950, Babasaheb Dr. B. R. Ambedkar enshrined the Sunri community in the Constitution of India as a Scheduled Caste. In 1956, our four-storeyed Central Office was purchased and erected at 52B Indian Mirror Street, where residential hostel arrangements are made for up to 50 students (with a dedicated female wing introduced in 2018) alongside a Guest Room facility for community members.'}
               </p>
               <div className="flex flex-wrap gap-4 pt-2">
                 <a
@@ -369,145 +341,6 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate, onDonateClick })
               </div>
             );
           })}
-        </div>
-      </section>
-
-      {/* 5. LATEST NEWS & ANNOUNCEMENTS (Card layout) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-8">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-widest text-orange-600">
-              {isBengali ? 'বিজ্ঞপ্তি ও সংবাদ' : 'Updates'}
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-serif-heading font-bold text-blue-900">
-              {isBengali ? 'সর্বশেষ সংবাদ ও ঘোষণাবলী' : 'Latest News & Announcements'}
-            </h2>
-          </div>
-          <a
-            href={PAGE_ROUTES.news}
-            onClick={(e) => {
-              e.preventDefault();
-              onNavigate('news');
-            }}
-            className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-900 hover:text-orange-600 transition-colors"
-          >
-            <span>{isBengali ? 'সকল বিজ্ঞপ্তি দেখুন' : 'View All Updates'}</span>
-            <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {LATEST_NEWS_UPDATES.slice(0, 3).map((news) => (
-            <div 
-              key={news.id}
-              className="bg-white rounded-xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-md transition-shadow"
-            >
-              <div className="space-y-3">
-                <div className="flex items-center justify-between text-xs">
-                  <span className="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-900 font-semibold">
-                    {isBengali ? (news.bengaliCategory || news.category) : news.category}
-                  </span>
-                  <span className="text-slate-400 font-medium">{isBengali ? (news.bengaliReadTime || news.readTime) : news.readTime}</span>
-                </div>
-
-                <h3 className="text-base font-bold text-blue-950 leading-snug hover:text-orange-600 transition-colors">
-                  {isBengali ? news.bengaliTitle : news.title}
-                </h3>
-
-                <p className="text-xs text-slate-600 leading-relaxed line-clamp-3">
-                  {isBengali ? news.bengaliSummary : news.summary}
-                </p>
-              </div>
-
-              <div className="pt-4 mt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                <span className="text-slate-500 font-medium">{isBengali ? (news.bengaliAuthor || news.author) : news.author}</span>
-                <a
-                  href={PAGE_ROUTES.news}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onNavigate('news');
-                  }}
-                  className="font-bold text-orange-600 hover:text-orange-700"
-                >
-                  {isBengali ? 'পড়ুন →' : 'Read →'}
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 6. UPCOMING EVENTS (Event card layout with date and description) */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-8">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-widest text-orange-600">
-              {isBengali ? 'কার্যসূচি' : 'Calendar'}
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-serif-heading font-bold text-blue-900">
-              {isBengali ? 'আসন্ন অনুষ্ঠান ও সম্মেলন' : 'Upcoming Events'}
-            </h2>
-          </div>
-          <a
-            href={PAGE_ROUTES.events}
-            onClick={(e) => {
-              e.preventDefault();
-              onNavigate('events');
-            }}
-            className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-900 hover:text-orange-600 transition-colors"
-          >
-            <span>{isBengali ? 'সকল অনুষ্ঠান ও আর্কাইভ' : 'View Full Schedule'}</span>
-            <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {UPCOMING_EVENTS.map((event) => (
-            <div 
-              key={event.id}
-              className="bg-white rounded-xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:border-orange-500 transition-colors"
-            >
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-xs font-bold text-orange-600">
-                    <Calendar className="w-4 h-4 text-orange-500" />
-                    <span>{isBengali ? event.bengaliDate : event.date}</span>
-                  </div>
-                  {event.isFeatured && (
-                    <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-amber-100 text-amber-800">
-                      {isBengali ? 'বিশেষ' : 'Featured'}
-                    </span>
-                  )}
-                </div>
-
-                <h3 className="text-base font-bold text-blue-900 leading-snug">
-                  {isBengali ? event.bengaliTitle : event.title}
-                </h3>
-
-                <p className="text-xs text-slate-500 leading-snug">
-                  📍 {isBengali ? event.bengaliVenue : event.venue}
-                </p>
-
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  {isBengali ? event.bengaliDescription : event.description}
-                </p>
-              </div>
-
-              <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
-                <span className="text-[11px] text-slate-500">{isBengali ? (event.bengaliTime || event.time || 'সকাল ১০:০০ ঘটিকা হতে') : (event.time || '10:00 AM onwards')}</span>
-                <a
-                  href={PAGE_ROUTES.events}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onNavigate('events');
-                  }}
-                  className="px-3 py-1.5 rounded-lg text-xs font-bold text-blue-900 hover:bg-blue-50 transition-colors"
-                >
-                  {isBengali ? 'অংশগ্রহণ বিবরণ' : 'RSVP & Details'}
-                </a>
-              </div>
-            </div>
-          ))}
         </div>
       </section>
 

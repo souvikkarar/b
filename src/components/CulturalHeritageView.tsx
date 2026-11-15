@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { 
-  Sparkles, 
-  Calendar, 
-  Award, 
-  BookOpen, 
-  Scale, 
-  MapPin, 
-  CheckCircle2, 
-  ArrowRight,
+  Sparkles,
+  Award,
+  BookOpen,
+  Scale,
+  MapPin,
+  CheckCircle2,
   Flame,
   Users,
   ShieldAlert
@@ -15,17 +13,13 @@ import {
 import { useLanguage } from '../context/LanguageContext';
 import { CULTURAL_HERITAGE_ITEMS, NGO_DETAILS } from '../data/ngoData';
 import { IndianPatternDivider } from './IndianPatternDivider';
-import { PageId, PAGE_ROUTES } from '../types';
+import { PageId } from '../types';
 
 interface CulturalHeritageViewProps {
   onNavigate: (page: PageId) => void;
-  onDonateClick: () => void;
 }
 
-export const CulturalHeritageView: React.FC<CulturalHeritageViewProps> = ({ 
-  onNavigate, 
-  onDonateClick 
-}) => {
+export const CulturalHeritageView: React.FC<CulturalHeritageViewProps> = ({ onNavigate }) => {
   const { lang, isBengali } = useLanguage();
   const [selectedHeritageItem, setSelectedHeritageItem] = useState<string | null>(null);
 
@@ -280,13 +274,6 @@ export const CulturalHeritageView: React.FC<CulturalHeritageViewProps> = ({
                 {isBengali ? 'ঐতিহাসিক দলিল ও আলোকচিত্র সংগ্রহ' : 'Heritage Gallery'}
               </h2>
             </div>
-            <button
-              onClick={() => onNavigate('gallery')}
-              className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-900 hover:text-orange-600 transition-colors"
-            >
-              <span>{isBengali ? 'সম্পূর্ণ আধুনিক গ্যালারি দেখুন' : 'View Full Gallery'}</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -354,21 +341,11 @@ export const CulturalHeritageView: React.FC<CulturalHeritageViewProps> = ({
           </div>
 
           <div className="flex flex-wrap gap-3 shrink-0">
-            <a
-              href={PAGE_ROUTES.membership}
-              onClick={(e) => {
-                e.preventDefault();
-                onNavigate('membership');
-              }}
-              className="px-5 py-3 rounded-xl font-bold text-sm bg-blue-950 text-white hover:bg-blue-900 shadow-sm"
-            >
-              {isBengali ? 'সদস্য হন' : 'Become a Member'}
-            </a>
             <button
-              onClick={onDonateClick}
+              onClick={() => onNavigate('contact')}
               className="px-5 py-3 rounded-xl font-bold text-sm bg-white text-orange-700 hover:bg-amber-50 shadow-sm cursor-pointer"
             >
-              {isBengali ? 'ঐতিহ্য তহবিলে অনুদান' : 'Donate to Heritage Fund'}
+              {isBengali ? 'যোগাযোগ করুন' : 'Contact Us'}
             </button>
           </div>
         </div>

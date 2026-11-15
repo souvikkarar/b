@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { 
-  HeartHandshake, 
   Phone, 
   Mail, 
   MapPin, 
@@ -21,13 +20,11 @@ import { PageId, PAGE_ROUTES } from '../types';
 interface FooterProps {
   activePage: PageId;
   onNavigate: (page: PageId) => void;
-  onDonateClick: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ 
-  activePage, 
-  onNavigate, 
-  onDonateClick 
+export const Footer: React.FC<FooterProps> = ({
+  activePage,
+  onNavigate
 }) => {
   const { lang, isBengali } = useLanguage();
   const t = TRANSLATIONS[lang];
@@ -47,11 +44,6 @@ export const Footer: React.FC<FooterProps> = ({
     { id: 'home', labelEn: 'Home', labelBn: 'প্রথম পাতা' },
     { id: 'about', labelEn: 'About Us', labelBn: 'আমাদের কথা' },
     { id: 'heritage', labelEn: 'Cultural Heritage', labelBn: 'সাংস্কৃতিক ঐতিহ্য' },
-    { id: 'membership', labelEn: 'Membership Form', labelBn: 'সদস্যপদ ফরম' },
-    { id: 'events', labelEn: 'Events & Activities', labelBn: 'কর্মসূচি ও সম্মেলন' },
-    { id: 'news', labelEn: 'News & Announcements', labelBn: 'সংবাদ ও বিজ্ঞপ্তি' },
-    { id: 'gallery', labelEn: 'Photo & Video Gallery', labelBn: 'চিত্রসম্ভার' },
-    { id: 'donate', labelEn: 'Donate / Support', labelBn: 'অনুদান ও সহায়তা তহবিল' },
     { id: 'contact', labelEn: 'Contact & Offices', labelBn: 'যোগাযোগ ও কার্যালয়' },
   ];
 
@@ -103,22 +95,12 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
-            <a
-              href={PAGE_ROUTES.membership}
-              onClick={(e) => {
-                e.preventDefault();
-                onNavigate('membership');
-              }}
-              className="px-5 py-3 rounded-xl font-bold text-xs bg-white text-blue-950 hover:bg-slate-100 shadow-sm"
-            >
-              {isBengali ? 'সদস্যপদ গ্রহণ করুন' : 'Become a Member'}
-            </a>
             <button
-              onClick={onDonateClick}
+              onClick={() => onNavigate('contact')}
               className="px-5 py-3 rounded-xl font-bold text-xs bg-orange-600 text-white hover:bg-orange-500 shadow-sm border border-orange-400 flex items-center gap-2 cursor-pointer"
             >
-              <HeartHandshake className="w-4 h-4" />
-              <span>{isBengali ? 'সহায়তা ও অনুদান প্রদান' : 'Donate & Support'}</span>
+              <Phone className="w-4 h-4" />
+              <span>{isBengali ? 'যোগাযোগ করুন' : 'Contact Us'}</span>
             </button>
           </div>
         </div>

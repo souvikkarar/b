@@ -1,23 +1,13 @@
 export type PageId = 
   | 'home' 
   | 'about' 
-  | 'heritage' 
-  | 'membership' 
-  | 'events' 
-  | 'news' 
-  | 'gallery' 
-  | 'donate' 
+  | 'heritage'
   | 'contact';
 
 export const PAGE_ROUTES: Record<PageId, string> = {
   home: '/',
   about: '/about',
   heritage: '/heritage',
-  membership: '/membership',
-  events: '/events',
-  news: '/news',
-  gallery: '/gallery',
-  donate: '/donate',
   contact: '/contact',
 };
 
@@ -25,11 +15,6 @@ export const ROUTE_TO_PAGE: Record<string, PageId> = {
   '/': 'home',
   '/about': 'about',
   '/heritage': 'heritage',
-  '/membership': 'membership',
-  '/events': 'events',
-  '/news': 'news',
-  '/gallery': 'gallery',
-  '/donate': 'donate',
   '/contact': 'contact',
 };
 

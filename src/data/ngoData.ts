@@ -37,7 +37,7 @@ export const NGO_DETAILS = {
   },
   registeredSite: {
     templeName: 'Maa Jagat Janani Temple',
-    address: '77, Manicktala Street, Kolkata – 700006 (Simla)',
+    address: '77, Maniktala Street, Kolkata – 700006 (Simla)',
     historicalSignificance: 'Birthplace where distinguished community leaders established the Samity in 1934.',
   },
   bengaliRegisteredSite: {
@@ -935,7 +935,7 @@ export const CULTURAL_HERITAGE_ITEMS = [
       'Historical vocational classification associated with trade and agro-craft',
       'Widespread rural population engaged as agricultural workers and laborers',
       'British notification in 1935 providing first statutory recognition of socio-economic backwardness',
-      'Congregation of distinguished community elders at 77 Manicktala Street in 1934 to form an enduring protective society'
+      'Congregation of distinguished community elders at 77 Maniktala Street in 1934 to form an enduring protective society'
     ],
     bengaliDetails: [
       'ঐতিহ্যগত পেশা ও কৃষিভিত্তিক গ্রামীণ জীবনের দীর্ঘ ঐতিহ্য',
@@ -1004,7 +1004,7 @@ export const CULTURAL_HERITAGE_ITEMS = [
     culturalSignificance: 'Strengthens community fraternity and cultural identity across generations.',
     bengaliCulturalSignificance: 'প্রজন্মের পর প্রজন্ম ধরে পারস্পরিক সৌহার্দ্য ও সাংস্কৃতিক ঐক্য অক্ষুণ্ণ রাখে।',
     details: [
-      'Foundational worship at Maa Jagat Janani Temple (77 Manicktala Street)',
+      'Foundational worship at Maa Jagat Janani Temple (77 Maniktala Street)',
       'Hostel Saraswati Puja organized annually by rural resident students',
       'Babasaheb Dr. B. R. Ambedkar Jayanti observed with constitutional awareness programs',
       'Poila Boishakh cultural get-togethers and scholarly felicitations'
@@ -1102,7 +1102,7 @@ export const PAST_EVENTS = [
     bengaliTitle: 'তপশিলি জাতি শংসাপত্র পুনরুদ্ধার সংবর্ধনা সমাবেশ (২০০০)',
     date: 'September 5, 2000',
     bengaliDate: '৫ সেপ্টেম্বর ২০০০',
-    venue: '77 Manicktala Street & Kolkata Secretariat',
+    venue: '77 Maniktala Street & Kolkata Secretariat',
     bengaliVenue: '৭৭ মানিকতলা স্ট্রিট ও কলকাতা মহাকরণ চত্বর',
     category: 'Past' as const,
     description: 'Celebration of the Supreme Court favorable verdict and West Bengal Chief Secretary directive restoring issuance of SC certificates under MLA Sadhan Pande.',
@@ -1216,7 +1216,7 @@ export const GALLERY_ITEMS = [
     bengaliDescription: '১৯৩৪ সালে যে পবিত্র স্থানে সমাজের বিশিষ্ট ব্যক্তিবর্গ বঙ্গীয় সাহা সমিতির সূচনা করেছিলেন।',
     date: 'Founded 1934 (Regd. 1936–37)',
     bengaliDate: 'প্রতিষ্ঠা ১৯৩৪ (নিবন্ধন ১৯৩৬-৩৭)',
-    location: '77, Manicktala Street, Kolkata – 700006 (Simla)',
+    location: '77, Maniktala Street, Kolkata – 700006 (Simla)',
     bengaliLocation: '৭৭, মানিকতলা স্ট্রিট, কলকাতা – ৭০০০১৬ (সিমলা)'
   },
   {
@@ -1388,7 +1388,7 @@ export const NEWSLETTER_ARCHIVE = [
     bengaliPublishDate: 'সেপ্টেম্বর ২০২৫',
     title: 'Special Commemorative Issue: 88 Years of Continuous Service',
     bengaliTitle: 'বিশেষ স্মারক সংখ্যা: ৮৮ বছরের নিরবচ্ছিন্ন সমাজসেবা',
-    description: 'Archival letters from 1936 founders, temple resolutions at 77 Manicktala St, and future vision.',
+    description: 'Archival letters from 1936 founders, temple resolutions at 77 Maniktala St, and future vision.',
     bengaliDescription: '১৯৩৬ সালের প্রতিষ্ঠাতাদের পত্রাবলী ও আগামী দিনের উন্নয়ন পরিকল্পনা।',
     pages: '44 Pages',
     bengaliPages: '৪৪ পৃষ্ঠা',

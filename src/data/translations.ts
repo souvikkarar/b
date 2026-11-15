@@ -40,7 +40,7 @@ export const TRANSLATIONS = {
   en: {
     // Top Bar & Navbar
     taxExemptionBadge: 'Registered Non-Profit | Est. 1936-37',
-    regDetails: 'Central Office: 52B Indian Mirror Street, Kol-13 • Birthplace: 77 Manicktala St, Kol-6',
+    regDetails: 'Central Office: 52B Indian Mirror Street, Kol-13 • Birthplace: 77 Maniktala St, Kol-6',
     helplineTitle: 'Central Office Helpline:',
     orgName: 'Bangiya Saha Samity',
     orgFullTitle: 'Bangiya Saha Samity (Sunri Samaj)',
@@ -72,9 +72,9 @@ export const TRANSLATIONS = {
     heroTitleStart: 'Dedicated to the Social, Educational & ',
     heroTitleAccent: 'Constitutional Rights',
     heroTitleEnd: ' of the Sunri Samaj.',
-    heroDescription: 'Established in 1936-37 at Maa Jagat Janani Temple (77 Manicktala Street) with our Central Office in our four-storeyed building at 52B Indian Mirror Street, Kolkata. Residential hostel arrangements are made for rural students (with a Guest Room facility for community members), alongside Social Help for Educational Purpose (Only for Our Community) with a special priority for female higher education, defending Scheduled Caste status, and extending distress relief to vulnerable members.',
+    heroDescription: 'Established in 1936-37 at Maa Jagat Janani Temple (77 Maniktala Street) with our Central Office in our four-storeyed building at 52B Indian Mirror Street, Kolkata. Residential hostel arrangements are made for rural students (with a Guest Room facility for community members), alongside Social Help for Educational Purpose (Only for Our Community) with a special priority for female higher education, defending Scheduled Caste status, and extending distress relief to vulnerable members.',
     heroBadge1Title: 'Established 1936-37',
-    heroBadge1Desc: 'Founded at Maa Jagat Janani Temple, 77 Manicktala Street by distinguished persons of Sunri Samaj.',
+    heroBadge1Desc: 'Founded at Maa Jagat Janani Temple, 77 Maniktala Street by distinguished persons of Sunri Samaj.',
     heroBadge2Title: 'Dr. Ambedkar Inclusion (1950)',
     heroBadge2Desc: 'Dr. Baba Saheb Ambedkar included Sunri as a Scheduled Caste community in the Constitution of India.',
     heroBadge3Title: 'Rural Students Hostel & Guest Room',
@@ -86,7 +86,7 @@ export const TRANSLATIONS = {
 
     // Metrics
     metrics: [
-      { label: 'Historic Foundation', value: '1936-37', subtext: 'Maa Jagat Janani Temple, 77 Manicktala St' },
+      { label: 'Historic Foundation', value: '1936-37', subtext: 'Maa Jagat Janani Temple, 77 Maniktala St' },
       { label: 'SC Constitutional Recognition', value: '1950', subtext: 'Included by Dr. Baba Saheb Ambedkar' },
       { label: 'Central Office Acquired', value: '1956', subtext: '4-Storeyed Building, 52B Indian Mirror St' },
       { label: 'Hostel & Guest Room', value: 'Up to 50', subtext: 'Hostel Arrangements & Member Guest Room' },
@@ -143,7 +143,7 @@ export const TRANSLATIONS = {
 
     // Contact & Footer
     contactHeadquarters: 'Central Office: 52B Indian Mirror Street, Kolkata - 700013',
-    contactBirthplace: 'Historic Birthplace: Maa Jagat Janani Temple, 77 Manicktala Street, Kolkata - 700006',
+    contactBirthplace: 'Historic Birthplace: Maa Jagat Janani Temple, 77 Maniktala Street, Kolkata - 700006',
     contactHostel: 'Rural Students Hostel & Guest Room: 52B Indian Mirror Street, Kolkata (Guest Room for Community Members)',
     footerAboutText: 'Bangiya Saha Samity (Sunri Samaj) is dedicated to the social, economic, educational, and constitutional development of the Scheduled Caste Sunri Community in West Bengal.',
   },
@@ -426,7 +426,7 @@ export const LOCALIZED_MILESTONES: Record<Language, LocalizedMilestone[]> = {
       year: '1934 - 1935',
       title: 'Founding at 77 Maniktala St & 1935 Govt of India Act',
       location: '77, Maniktala Street, Kolkata – 700006 (Simla)',
-      description: 'Under the Government of India Act of 1935 enacted by the British administration, the economically and socially backward Sunri community was designated as a "Scheduled Caste" via official notifications due to historical occupational segregation, alongside large numbers of impoverished laborers and agricultural workers. In 1934, philanthropic and eminent individuals established Bangiya Saha Samity (Sunri Samaj) at 77, Manicktala Street (Simla) in Maa Jagat Janani Temple, where residential arrangements were made for rural students pursuing higher education.',
+      description: 'Under the Government of India Act of 1935 enacted by the British administration, the economically and socially backward Sunri community was designated as a "Scheduled Caste" via official notifications due to historical occupational segregation, alongside large numbers of impoverished laborers and agricultural workers. In 1934, philanthropic and eminent individuals established Bangiya Saha Samity (Sunri Samaj) at 77, Maniktala Street (Simla) in Maa Jagat Janani Temple, where residential arrangements were made for rural students pursuing higher education.',
       badge: 'Foundation Era (1934-35)'
     },
     {

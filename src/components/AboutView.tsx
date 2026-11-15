@@ -41,15 +41,9 @@ import { PageId } from '../types';
 
 interface AboutViewProps {
   onNavigate: (page: PageId) => void;
-  onDonateClick: () => void;
-  onLegalAidClick: () => void;
 }
 
-export const AboutView: React.FC<AboutViewProps> = ({ 
-  onNavigate, 
-  onDonateClick, 
-  onLegalAidClick 
-}) => {
+export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
   const { lang, isBengali } = useLanguage();
   const [activeTab, setActiveTab] = useState<'all' | 'advisory' | 'office_bearers' | 'vice_presidents' | 'committee'>('all');
 
@@ -100,7 +94,7 @@ export const AboutView: React.FC<AboutViewProps> = ({
             <p>
               {isBengali 
                 ? 'বঙ্গীয় সাহা সমিতি (শুঁড়ি সমাজ) ১৯৩৪ সালে কলকাতার ৭৭ মানিকতলা স্ট্রিটের (সিমলা) মা জগৎ জননী মন্দিরে সমাজের বিশিষ্ট ব্যক্তিবর্গের দ্বারা গঠিত হয়। পরবর্তীতে সমাজকল্যাণমূলক কর্মকাণ্ডের বিধিবদ্ধ কাঠামোর স্বার্থে ১৯৩৬-৩৭ সালে সোসাইটি রেজিস্ট্রেশন অ্যাক্টের অধীন নিবন্ধন নং ৪৫২২ অনুযায়ী এটি নিবন্ধিত হয়।'
-                : 'Bangiya Saha Samity (Sunri Samaj) was established in 1934 by distinguished community leaders at Maa Jagat Janani Temple, situated at 77 Manicktala Street, Kolkata – 700006 (Simla). To diffuse useful knowledge, promote education, and introduce social reforms, the organization was formally registered under Registration No. 4522 of 1936–37.'}
+                : 'Bangiya Saha Samity (Sunri Samaj) was established in 1934 by distinguished community leaders at Maa Jagat Janani Temple, situated at 77 Maniktala Street, Kolkata – 700006 (Simla). To diffuse useful knowledge, promote education, and introduce social reforms, the organization was formally registered under Registration No. 4522 of 1936–37.'}
             </p>
             <p>
               {isBengali
