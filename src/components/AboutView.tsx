@@ -300,6 +300,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate }) => {
                     <img
                       src={member.imageUrl}
                       alt={isBengali ? member.bengaliName : member.name}
+                      style={member.imagePosition ? { objectPosition: member.imagePosition } : undefined}
                       className={
                         isNamitaSaha
                           ? "w-full h-full object-contain object-top origin-top scale-[1.25] drop-shadow-xl opacity-95 transition-transform duration-300 group-hover:scale-[1.28]"

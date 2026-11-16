@@ -445,7 +445,7 @@ export const CENTRAL_OFFICE_BEARERS = [
     bio: 'Leads day-to-day administrative operations, student hostel management at 52B Indian Mirror Street, public relations, and inter-district coordination.',
     bengaliBio: 'সমিতির সম্পাদক হিসেবে কেন্দ্রীয় কার্যালয় পরিচালনা, ছাত্রাবাস প্রশাসন, সামাজিক জনসংযোগ ও জেলা সমন্বয়ের সার্বিক প্রশাসনিক দায়িত্ব পালন করছেন।',
     contactNote: 'Central Secretariat, 52B Indian Mirror St',
-    imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80'
+    imageUrl: '/members/subir-saha.jpg'
   },
   {
     id: 'ob-treasurer',
@@ -661,7 +661,7 @@ export const LEADERSHIP_MEMBERS = [
     bio: 'Leads the Central Secretariat, overseeing daily administrative operations, 50-student residential hostel administration at 52B Indian Mirror St, publications, and state-wide member relations.',
     bengaliBio: 'সমিতির সম্পাদক হিসেবে কেন্দ্রীয় কার্যালয় পরিচালনা, ৫০ আসনের ছাত্রাবাস প্রশাসন, প্রকাশনা ও রাজ্যব্যাপী সদস্য সমন্বয়ের সার্বিক দায়িত্ব পালন করছেন।',
     contactNote: 'Central Secretariat, 52B Indian Mirror St',
-    imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80'
+    imageUrl: '/members/subir-saha.jpg'
   },
   {
     id: 'exec-treasurer',
@@ -787,7 +787,7 @@ export const LEADERSHIP_MEMBERS = [
     bio: 'Vice President championing women empowerment, female higher education priority, student hostel admissions, and family counseling.',
     bengaliBio: 'নারী উন্নয়ন, নারী উচ্চশিক্ষায় বিশেষ অগ্রাধিকার ও সামাজিক কল্যাণমূলক কার্যক্রমে বিশেষ নেতৃত্ব দিচ্ছেন সহ-সভাপতি শ্রীমতী হাসি সাহা।',
     contactNote: "Women's Empowerment Cell",
-    imageUrl: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=400&q=80'
+    imageUrl: '/members/hasi-saha.jpg'
   },
   {
     id: 'vp-sampad-mondal',
@@ -869,7 +869,8 @@ export const LEADERSHIP_MEMBERS = [
     bio: 'Executive committee member steering district liaison, caste certificate assistance, and member welfare in North 24 Parganas.',
     bengaliBio: 'উত্তর ২৪ পরগনার কার্যনির্বাহী সদস্য; এসসি শংসাপত্র ও স্থানীয় সদস্যদের কল্যাণে দায়িত্বরত।',
     contactNote: 'North 24 Parganas Liaison',
-    imageUrl: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=400&q=80'
+    imageUrl: '/members/pijus-kanti-saha.jpg',
+    imagePosition: '50% 22%', // focus on the face in this tall portrait
   },
   {
     id: 'cm-prasanta-saha',
