@@ -113,7 +113,7 @@ export const ContactView: React.FC = () => {
                     : '• Guest Room facility available for community members • Hostel residential arrangements made for up to 50 students'}
                 </p>
                 <div className="inline-block px-2.5 py-1 rounded bg-blue-50 text-blue-900 font-mono text-xs font-bold">
-                  {isBengali ? (NGO_DETAILS.bengaliHeadOffice?.regdNo || 'সোসাইটি রেজিস্ট্রেশন নং ৪৫২২ (১৯৩৬-৩৭)') : NGO_DETAILS.headOffice.regdNo}
+                  {isBengali ? NGO_DETAILS.bengaliHeadOffice.regdNo : NGO_DETAILS.headOffice.regdNo}
                 </div>
               </div>
 

@@ -39,7 +39,6 @@ export interface LocalizedLegalFAQ {
 export const TRANSLATIONS = {
   en: {
     // Top Bar & Navbar
-    taxExemptionBadge: 'Registered Non-Profit | Est. 1936-37',
     regDetails: 'Central Office: 52B Indian Mirror Street, Kol-13 • Birthplace: 77 Maniktala St, Kol-6',
     helplineTitle: 'Central Office Helpline:',
     orgName: 'Bangiya Saha Samity',
@@ -150,7 +149,6 @@ export const TRANSLATIONS = {
 
   bn: {
     // Top Bar & Navbar
-    taxExemptionBadge: 'নিবন্ধিত জনকল্যাণ প্রতিষ্ঠান | স্থাপিত ১৯৩৬-৩৭',
     regDetails: 'কেন্দ্রীয় কার্যালয়: ৫২বি ইন্ডিয়ান মিরর স্ট্রিট, কোল-১৩ • প্রতিষ্ঠাস্থল: ৭৭ মানিকতলা স্ট্রিট, কোল-৬',
     helplineTitle: 'কেন্দ্রীয় কার্যালয় হেল্পলাইন:',
     orgName: 'বঙ্গীয় সাহা সমিতি',

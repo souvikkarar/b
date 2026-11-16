@@ -145,12 +145,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 {t.heroCtaExplore} ↓
               </button>
             </div>
-
-            {/* Accreditation Tagline */}
-            <div className="flex items-center gap-2 text-xs text-[#6C4A31] pt-1">
-              <span className="w-2 h-2 rounded-full bg-[#2D6A4F]"></span>
-              <span>{NGO_DETAILS.officialStatus}</span>
-            </div>
           </div>
 
           {/* Right Column: Grounded Documentary Photo Card & Field Snapshot */}

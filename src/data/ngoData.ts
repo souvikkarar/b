@@ -11,10 +11,8 @@ export const NGO_DETAILS = {
   hostelInfo: 'Student Hostel (Residential arrangements made for up to 50 students, including Female Wing since 2018) & Guest Room for Community Members',
   buildingInfo: 'Four-Storeyed Central Office Building at 52B, INDIAN MIRROR STREET, KOLKATA-700013 (Opposite G. D. Hospital), Taltala, with Student Hostel & Guest Room Facility',
   constitutionalRecognition: 'British Govt of India Act 1935 & Indian Constitution 1950 by Dr. B.R. Ambedkar',
-  registrationNo: '4522 of 1936–37',
-  darpanId: 'WB/2018/0192841',
-  officialStatus: 'Registered Non-Profit Social Welfare Organisation (Est. 1936-37)',
-  taxExemption: 'Registered Non-Profit Social Welfare Organisation (Est. 1936-37)',
+  registrationNo: '04522 of 1936–37',
+  newRegistrationNo: 'SO969057',
   helpline: '033-22271599 / 9433041597 (M)',
   emergencyLegalPhone: '+91 94330 41597',
   email: 'bangiyasahasamity1@gmail.com',
@@ -22,7 +20,7 @@ export const NGO_DETAILS = {
   headOffice: {
     address: '52B, INDIAN MIRROR STREET, KOLKATA-700013',
     landmark: '(Opposite G. D. Hospital), Taltala — Central Office, Hostel & Guest Room Facility',
-    regdNo: 'Regd. No. 4522 of 1936–37',
+    regdNo: 'Legacy Regd. No. 04522 (1936–37) • New Regd. No. SO969057',
     phone: '033-22271599 / 9433041597 (M)',
     email: 'bangiyasahasamity1@gmail.com',
     visitingHours: 'Mon - Sat: 10:00 AM - 7:00 PM | Sun: 11:00 AM - 4:00 PM',
@@ -30,7 +28,7 @@ export const NGO_DETAILS = {
   bengaliHeadOffice: {
     address: '৫২বি, ইন্ডিয়ান মিরর স্ট্রিট, কলকাতা – ৭০০০১৩',
     landmark: '(জি.ডি. হাসপাতালের বিপরীতে), তালতলা — কেন্দ্রীয় কার্যালয়, ছাত্রাবাস ও অতিথি কক্ষ',
-    regdNo: 'রেজিস্ট্রি নং ৪৫২২ অব ১৯৩৬–৩৭',
+    regdNo: 'পূর্বতন রেজি. নং ০৪৫২২ (১৯৩৬–৩৭) • নতুন রেজি. নং SO969057',
     phone: '033-22271599 / 9433041597 (M)',
     email: 'bangiyasahasamity1@gmail.com',
     visitingHours: 'সোম - শনি: সকাল ১০:০০ - সন্ধ্যা ৭:০০ | রবি: সকাল ১১:০০ - বিকাল ৪:০০',
@@ -72,12 +70,12 @@ export const HISTORICAL_MILESTONES = [
   },
   {
     year: '1936–37',
-    title: 'Official Registration: Regd. No. 4522 of 1936–37',
-    bengaliTitle: 'সোসাইটি হিসেবে বিধিবদ্ধ নিবন্ধন: নং ৪৫২২ (১৯৩৬-৩৭)',
+    title: 'Official Registration: Regd. No. 04522 of 1936–37',
+    bengaliTitle: 'সোসাইটি হিসেবে বিধিবদ্ধ নিবন্ধন: নং ০৪৫২২ (১৯৩৬-৩৭)',
     location: 'Kolkata, West Bengal',
     bengaliLocation: 'কলকাতা, পশ্চিমবঙ্গ',
-    description: 'The society was formally incorporated and registered under the Societies Registration Act as Bangiya Saha Samity (Sunri Samaj) under Registration No. 4522 of 1936–37 with its 5 sacred objectives.',
-    bengaliDescription: 'সোসাইটি রেজিস্ট্রেশন অ্যাক্টের অধীনে ৪৫২২ অব ১৯৩৬-৩৭ নম্বরে বঙ্গীয় সাহা সমিতি (শুঁড়ি সমাজ) বিধিবদ্ধভাবে নিবন্ধিত হয় এবং তার ৫টি সাংবিধানিক উদ্দেশ্য গৃহীত হয়।',
+    description: 'The society was formally incorporated and registered under the Societies Registration Act as Bangiya Saha Samity (Sunri Samaj) under Registration No. 04522 of 1936–37 with its 5 sacred objectives. The Samity now holds New Registration No. SO969057.',
+    bengaliDescription: 'সোসাইটি রেজিস্ট্রেশন অ্যাক্টের অধীনে ০৪৫২২ অব ১৯৩৬-৩৭ নম্বরে বঙ্গীয় সাহা সমিতি (শুঁড়ি সমাজ) বিধিবদ্ধভাবে নিবন্ধিত হয় এবং তার ৫টি সাংবিধানিক উদ্দেশ্য গৃহীত হয়। বর্তমানে সমিতির নতুন রেজিস্ট্রেশন নং SO969057।',
     badge: 'Official Registration',
     bengaliBadge: 'বিধিবদ্ধ নিবন্ধন (১৯৩৬-৩৭)'
   },
@@ -1348,8 +1346,7 @@ export const BANK_DETAILS = {
   accountNumber: '38192019360',
   ifscCode: 'SBIN0000084',
   branch: 'Bowbazar / Esplanade Branch, Kolkata',
-  micrCode: '700002018',
-  taxStatus: 'Registered Non-Profit Organisation (Regd. No. 4522 of 1936–37)'
+  micrCode: '700002018'
 };
 
 export const NEWSLETTER_ARCHIVE = [

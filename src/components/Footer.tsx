@@ -57,7 +57,7 @@ export const Footer: React.FC<FooterProps> = ({
           <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-400/25 text-xs font-medium text-amber-200/95 shrink-0 shadow-2xs">
             <Scale className="w-3.5 h-3.5 text-amber-400 shrink-0" />
             <span className="tracking-wide">
-              {isBengali ? 'স্থাপিত ১৯৩৪ (রেজিঃ ১৯৩৬-৩৭) • রেজিঃ নং ৪৫২২' : 'Est. 1934 (Regd. 1936-37) • Regd. No. 4522'}
+              {isBengali ? 'স্থাপিত ১৯৩৪ • পূর্বতন রেজিঃ নং ০৪৫২২ (১৯৩৬-৩৭) • নতুন রেজিঃ নং SO969057' : 'Est. 1934 • Legacy Regd. No. 04522 (1936-37) • New Regd. No. SO969057'}
             </span>
           </div>
 
@@ -143,9 +143,8 @@ export const Footer: React.FC<FooterProps> = ({
               <div className="font-bold text-orange-400">
                 {isBengali ? 'আইনি ও সরকারি নিবন্ধন:' : 'Official Credentials:'}
               </div>
-              <div className="text-[11px]">• {isBengali ? 'রেজিস্ট্রেশন নং: ৪৫২২ (১৯৩৬-৩৭) পশ্চিমবঙ্গ সরকার' : 'Registration No: 4522 of 1936–37 (Govt. of West Bengal)'}</div>
-              <div className="text-[11px]">• {isBengali ? 'বিধিবদ্ধ অলাভজনক তপশিলি জাতি সামাজিক কল্যাণ সংস্থা' : 'Registered Non-Profit Social Welfare Organisation'}</div>
-              <div className="text-[11px]">• {isBengali ? 'নীতি আয়োগ এনজিও দর্পণ ইউআইডি: WB/2026/045220' : 'NITI Aayog NGO Darpan UID: WB/2026/045220'}</div>
+              <div className="text-[11px]">• {isBengali ? 'পূর্বতন রেজিস্ট্রেশন নং: ০৪৫২২ (১৯৩৬-৩৭)' : 'Legacy Registration No: 04522 of 1936–37'}</div>
+              <div className="text-[11px]">• {isBengali ? 'নতুন রেজিস্ট্রেশন নং: SO969057' : 'New Registration No: SO969057'}</div>
             </div>
           </div>
 

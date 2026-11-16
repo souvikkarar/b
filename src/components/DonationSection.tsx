@@ -148,12 +148,6 @@ export const DonationSection: React.FC<DonationSectionProps> = ({ initialCause }
                   <span className="text-[#8A5A36] font-semibold">{isBengali ? 'বরাদ্দকৃত খাত:' : 'Allocated Cause:'}</span>{' '}
                   <span className="font-medium text-[#2D241E]">{donationSuccessRecord.cause}</span>
                 </div>
-                <div>
-                  <span className="text-[#8A5A36] font-semibold">{isBengali ? 'সংগঠনের মর্যাদা:' : 'Organisation Status:'}</span>{' '}
-                  <span className="font-bold text-[#2D6A4F]">
-                    {isBengali ? 'নিবন্ধিত জনকল্যাণমূলক প্রতিষ্ঠান' : 'Registered Non-Profit Organisation'}
-                  </span>
-                </div>
               </div>
 
               <div className="p-3 bg-[#FAF7F2] rounded border border-[#8A5A36]/15 flex items-center justify-between">

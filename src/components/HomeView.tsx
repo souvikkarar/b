@@ -148,8 +148,8 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
               </h2>
               <p className="text-slate-700 leading-relaxed text-base">
                 {isBengali 
-                  ? 'বঙ্গীয় সাহা সমিতি (শুঁড়ি সমাজ) ১৯৩৪ সালে কলকাতার ৭৭ মানিকতলা স্ট্রিটের (সিমলা) মা জগৎ জননী মন্দিরে সমাজের বিশিষ্ট ব্যক্তিবর্গের উদ্যোগে প্রতিষ্ঠিত হয় এবং ১৯৩৬-৩৭ সালে বিধিবদ্ধভাবে নিবন্ধিত হয় (নিবন্ধন নং ৪৫২২)। ১৯৫০ সালে বাবাসাহেব ড. বি. আর. আম্বেদকর ভারতের সংবিধানে শুঁড়ি সম্প্রদায়কে তপশিলি জাতি হিসেবে অন্তর্ভুক্ত করেন। ১৯৫৬ সালে ৫২বি ইন্ডিয়ান মিরর স্ট্রিটে নিজস্ব জমিতে ৪ তলা কেন্দ্রীয় কার্যালয় নির্মিত হয়, যেখানে বর্তমানে ৫০ জন গ্রামীণ শিক্ষার্থীর জন্য ছাত্রাবাসের আবাসিক ব্যবস্থা করা হয় (২০১৮ সালে ছাত্রীদের পৃথক শাখা চালু হয়) এবং সমাজের সদস্যদের জন্য অতিথি কক্ষের (Guest Room) সুবিধাও রয়েছে।'
-                  : 'Bangiya Saha Samity (Sunri Samaj) was established in 1934 at Maa Jagat Janani Temple, 77 Maniktala Street, Kolkata (Simla) by distinguished community leaders, and formally incorporated under Registration No. 4522 of 1936–37. In 1950, Babasaheb Dr. B. R. Ambedkar enshrined the Sunri community in the Constitution of India as a Scheduled Caste. In 1956, our four-storeyed Central Office was purchased and erected at 52B Indian Mirror Street, where residential hostel arrangements are made for up to 50 students (with a dedicated female wing introduced in 2018) alongside a Guest Room facility for community members.'}
+                  ? 'বঙ্গীয় সাহা সমিতি (শুঁড়ি সমাজ) ১৯৩৪ সালে কলকাতার ৭৭ মানিকতলা স্ট্রিটের (সিমলা) মা জগৎ জননী মন্দিরে সমাজের বিশিষ্ট ব্যক্তিবর্গের উদ্যোগে প্রতিষ্ঠিত হয় এবং ১৯৩৬-৩৭ সালে বিধিবদ্ধভাবে নিবন্ধিত হয় (পূর্বতন নিবন্ধন নং ০৪৫২২; নতুন রেজিস্ট্রেশন নং SO969057)। ১৯৫০ সালে বাবাসাহেব ড. বি. আর. আম্বেদকর ভারতের সংবিধানে শুঁড়ি সম্প্রদায়কে তপশিলি জাতি হিসেবে অন্তর্ভুক্ত করেন। ১৯৫৬ সালে ৫২বি ইন্ডিয়ান মিরর স্ট্রিটে নিজস্ব জমিতে ৪ তলা কেন্দ্রীয় কার্যালয় নির্মিত হয়, যেখানে বর্তমানে ৫০ জন গ্রামীণ শিক্ষার্থীর জন্য ছাত্রাবাসের আবাসিক ব্যবস্থা করা হয় (২০১৮ সালে ছাত্রীদের পৃথক শাখা চালু হয়) এবং সমাজের সদস্যদের জন্য অতিথি কক্ষের (Guest Room) সুবিধাও রয়েছে।'
+                  : 'Bangiya Saha Samity (Sunri Samaj) was established in 1934 at Maa Jagat Janani Temple, 77 Maniktala Street, Kolkata (Simla) by distinguished community leaders, and formally incorporated under Registration No. 04522 of 1936–37 (New Registration No. SO969057). In 1950, Babasaheb Dr. B. R. Ambedkar enshrined the Sunri community in the Constitution of India as a Scheduled Caste. In 1956, our four-storeyed Central Office was purchased and erected at 52B Indian Mirror Street, where residential hostel arrangements are made for up to 50 students (with a dedicated female wing introduced in 2018) alongside a Guest Room facility for community members.'}
               </p>
               <div className="flex flex-wrap gap-4 pt-2">
                 <a
@@ -187,7 +187,7 @@ export const HomeView: React.FC<HomeViewProps> = ({ onNavigate }) => {
               <div className="space-y-3 text-sm">
                 <div className="p-3 bg-white rounded-lg border border-slate-200">
                   <div className="text-xs text-slate-500">{isBengali ? 'প্রতিষ্ঠা ও নিবন্ধন' : 'Foundation & Registration'}</div>
-                  <div className="font-bold text-blue-900">{isBengali ? '১৯৩৪ / ১৯৩৬–৩৭ (রেজি. ৪৫২২)' : '1934 / 1936–37 (Regd. 4522)'}</div>
+                  <div className="font-bold text-blue-900">{isBengali ? '১৯৩৪ / ১৯৩৬–৩৭ (পূর্বতন রেজি. ০৪৫২২ • নতুন রেজি. SO969057)' : '1934 / 1936–37 (Legacy Regd. 04522 • New Regd. SO969057)'}</div>
                 </div>
                 <div className="p-3 bg-white rounded-lg border border-slate-200">
                   <div className="text-xs text-slate-500">{isBengali ? 'ছাত্রাবাস ও অতিথি কক্ষ' : 'Hostel & Guest Room'}</div>
