@@ -3,6 +3,7 @@ export type PageId =
   | 'about' 
   | 'heritage'
   | 'legends'
+  | 'updates'
   | 'contact';
 
 export const PAGE_ROUTES: Record<PageId, string> = {
@@ -10,6 +11,7 @@ export const PAGE_ROUTES: Record<PageId, string> = {
   about: '/about',
   heritage: '/heritage',
   legends: '/legends',
+  updates: '/updates',
   contact: '/contact',
 };
 
@@ -18,6 +20,7 @@ export const ROUTE_TO_PAGE: Record<string, PageId> = {
   '/about': 'about',
   '/heritage': 'heritage',
   '/legends': 'legends',
+  '/updates': 'updates',
   '/contact': 'contact',
 };
 

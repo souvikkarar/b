@@ -4,6 +4,7 @@ import {
   X,
   Sparkles,
   Award,
+  Megaphone,
   Landmark,
   Mail,
   Phone,
@@ -33,6 +34,7 @@ const NAV_ITEMS: NavItem[] = [
   { id: 'about', labelEn: 'About Us', labelBn: 'আমাদের কথা', shortEn: 'About', shortBn: 'আমাদের কথা', icon: <BookOpen className="w-4 h-4" /> },
   { id: 'heritage', labelEn: 'Cultural Heritage', labelBn: 'সাংস্কৃতিক ঐতিহ্য', shortEn: 'Heritage', shortBn: 'ঐতিহ্য', icon: <Sparkles className="w-4 h-4" /> },
   { id: 'legends', labelEn: 'Our Legends', labelBn: 'স্মরণীয় ব্যক্তিত্ব', shortEn: 'Legends', shortBn: 'স্মরণীয় ব্যক্তিত্ব', icon: <Award className="w-4 h-4" /> },
+  { id: 'updates', labelEn: 'Updates', labelBn: 'সাম্প্রতিক খবর', shortEn: 'Updates', shortBn: 'খবর', icon: <Megaphone className="w-4 h-4" /> },
   { id: 'contact', labelEn: 'Contact Us', labelBn: 'যোগাযোগ', shortEn: 'Contact', shortBn: 'যোগাযোগ', icon: <Mail className="w-4 h-4" /> },
 ];
 

@@ -45,6 +45,7 @@ export const Footer: React.FC<FooterProps> = ({
     { id: 'about', labelEn: 'About Us', labelBn: 'আমাদের কথা' },
     { id: 'heritage', labelEn: 'Cultural Heritage', labelBn: 'সাংস্কৃতিক ঐতিহ্য' },
     { id: 'legends', labelEn: 'Our Legends', labelBn: 'স্মরণীয় ব্যক্তিত্ব' },
+    { id: 'updates', labelEn: 'Updates & Announcements', labelBn: 'সাম্প্রতিক খবর ও বিজ্ঞপ্তি' },
     { id: 'contact', labelEn: 'Contact & Offices', labelBn: 'যোগাযোগ ও কার্যালয়' },
   ];
 

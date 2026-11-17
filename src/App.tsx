@@ -7,6 +7,7 @@ import { HomeView } from './components/HomeView';
 import { AboutView } from './components/AboutView';
 import { CulturalHeritageView } from './components/CulturalHeritageView';
 import { LegendsView } from './components/LegendsView';
+import { UpdatesView } from './components/UpdatesView';
 import { ContactView } from './components/ContactView';
 
 function MainApp() {
@@ -57,6 +58,10 @@ function MainApp() {
         en: 'Our Legends — Pioneers of the Sunri Community | Bangiya Saha Samity',
         bn: 'স্মরণীয় ব্যক্তিত্ব — শুঁড়ি সমাজের পথপ্রদর্শক | বঙ্গীয় সাহা সমিতি',
       },
+      updates: {
+        en: 'Updates & Announcements | Bangiya Saha Samity',
+        bn: 'সাম্প্রতিক খবর ও বিজ্ঞপ্তি | বঙ্গীয় সাহা সমিতি',
+      },
       contact: {
         en: 'Contact Us & Central Office | Bangiya Saha Samity',
         bn: 'যোগাযোগ ও কেন্দ্রীয় কার্যালয় | বঙ্গীয় সাহা সমিতি',
@@ -95,6 +100,8 @@ function MainApp() {
         {activePage === 'heritage' && <CulturalHeritageView onNavigate={navigateTo} />}
 
         {activePage === 'legends' && <LegendsView onNavigate={navigateTo} />}
+
+        {activePage === 'updates' && <UpdatesView onNavigate={navigateTo} />}
 
         {activePage === 'contact' && (
           <ContactView />
