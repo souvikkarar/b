@@ -1,8 +1,0 @@
-{
-  "name": "Remix Remix Bangiya Saha Samity",
-  "description": "A Social Organisation of the Scheduled Caste Sunri Community of W.B",
-  "requestFramePermissions": [],
-  "majorCapabilities": [
-    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
-  ]
-}

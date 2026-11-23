@@ -3,55 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-      (function() {
-        try {
-          var _rawFetch = window.fetch;
-          var _currentFetch = _rawFetch;
-          var desc = Object.getOwnPropertyDescriptor(window, 'fetch') ||
-                     (typeof Window !== 'undefined' && Window.prototype ? Object.getOwnPropertyDescriptor(Window.prototype, 'fetch') : null);
-          
-          if (!desc || !desc.set || !desc.writable) {
-            Object.defineProperty(window, 'fetch', {
-              get: function() {
-                return _currentFetch;
-              },
-              set: function(val) {
-                _currentFetch = val;
-              },
-              configurable: true,
-              enumerable: true
-            });
-          }
-        } catch (e) {
-          // Fail-safe
-        }
-
-        window.addEventListener('error', function(event) {
-          if (event && event.message && event.message.indexOf('Cannot set property fetch') !== -1) {
-            event.preventDefault();
-            if (typeof event.stopPropagation === 'function') {
-              event.stopPropagation();
-            }
-            return true;
-          }
-        }, true);
-      })();
-    </script>
-    <title>Bangiya Saha Samity (Sunri Samaj) - A Social Organisation of the Scheduled Caste Sunri Community of W.B</title>
-    <link rel="icon" type="image/webp" href="/logo.webp" />
-    <meta name="description" content="Established 1936-37. A Social Organisation of the Scheduled Caste Sunri Community of West Bengal." />
-    <meta property="og:title" content="Bangiya Saha Samity (Sunri Samaj)" />
-    <meta property="og:description" content="Established 1936-37. A Social Organisation of the Scheduled Caste Sunri Community of West Bengal." />
+    <title>Muzicks — Live Guitar & Western Vocal Lessons</title>
+    <meta name="description" content="Learn guitar and western vocals with live 1-on-1 online lessons. Structured levels from beginner to advanced. Book a free trial class with Muzicks." />
+    <meta property="og:title" content="Muzicks — Live Guitar & Western Vocal Lessons" />
+    <meta property="og:description" content="Live 1-on-1 online guitar and western vocal lessons, from first chord to first stage." />
     <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Marcellus&family=Noto+Sans+Bengali:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Rozha+One&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#2A1E4A" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-orange-500 selection:text-white">
+  <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

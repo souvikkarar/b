@@ -1,29 +1,53 @@
 @import "tailwindcss";
 
+@theme {
+  --color-ink: #17131f;
+  --color-plum: #2a1e4a;
+  --color-plum-soft: #3b2c63;
+  --color-cream: #fbf6ee;
+  --color-sand: #f2e9dc;
+  --color-line: #e6dccd;
+  --color-coral: #ff5c39;
+  --color-coral-dark: #e2401e;
+  --color-gold: #ffc24b;
+  --color-muted: #6b6478;
+
+  --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
   body {
-    font-family: 'Plus Jakarta Sans', 'Noto Sans Bengali', system-ui, -apple-system, sans-serif;
-    background-color: #F8FAFC;
-    color: #0F172A;
+    @apply bg-cream text-ink font-sans antialiased;
   }
-  
-  h1, h2, h3, .font-serif-heading {
-    font-family: 'Noto Serif Bengali', 'Marcellus', 'Cinzel', serif;
+  h1, h2, h3 {
+    @apply font-display tracking-tight;
+  }
+  ::selection {
+    @apply bg-coral text-white;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-coral);
+    outline-offset: 3px;
+    border-radius: 6px;
   }
 }
 
-/* Custom scrollbar in White, Blue & Saffron tones */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #F1F5F9;
-}
-::-webkit-scrollbar-thumb {
-  background: #1E3A8A;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #EA580C;
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 
+/* Gentle equaliser animation used in the hero */
+@keyframes eq {
+  0%, 100% { transform: scaleY(0.35); }
+  50% { transform: scaleY(1); }
+}
+.eq-bar {
+  transform-origin: bottom;
+  animation: eq 1.4s ease-in-out infinite;
+}
