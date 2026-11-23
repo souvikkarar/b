@@ -1,73 +1,55 @@
 import React from 'react';
-import { ArrowRight, Check, Guitar, MicVocal } from 'lucide-react';
 import { COURSES } from '../data/content';
 import { SectionHeading } from './SectionHeading';
-
-const ICONS = { guitar: Guitar, vocals: MicVocal };
+import { ChordDiagram, PitchLine } from './Illustrations';
 
 export const Courses: React.FC = () => (
   <section id="courses" className="py-20 sm:py-28">
-    <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <div className="max-w-6xl mx-auto px-5 sm:px-8">
       <SectionHeading
-        eyebrow="Courses"
         title="Two instruments. One clear path."
         intro="Pick the course that excites you. Every lesson is live and built around your level, your goals and the music you love."
       />
 
-      <div className="mt-12 grid md:grid-cols-2 gap-6">
-        {COURSES.map((c, idx) => {
-          const Icon = ICONS[c.id];
-          const dark = idx === 0;
-          return (
-            <article
-              key={c.id}
-              className={`relative rounded-[1.75rem] p-7 sm:p-9 flex flex-col ${
-                dark ? 'bg-plum text-white' : 'bg-white text-ink border border-line'
-              }`}
+      <div className="mt-14 grid md:grid-cols-2 gap-x-16 gap-y-20">
+        {COURSES.map((c) => (
+          <article key={c.id} className="flex flex-col">
+            <div className="h-40 flex items-end">
+              {c.id === 'guitar' ? (
+                <ChordDiagram
+                  title="Chord chart for E minor"
+                  frets={[0, 2, 2, 0, 0, 0]}
+                  fingers={[null, 2, 3, null, null, null]}
+                  className="h-40 w-auto -ml-4"
+                />
+              ) : (
+                <PitchLine className="h-32 w-auto" />
+              )}
+            </div>
+
+            <h3 className="mt-6 text-4xl sm:text-5xl font-bold tracking-[-0.03em]">{c.title}</h3>
+            <p className="mt-2 text-lg text-cobalt font-medium">{c.kicker}</p>
+            <p className="mt-4 text-lg text-muted leading-relaxed max-w-[36rem]">{c.summary}</p>
+
+            <h4 className="mt-8 font-semibold">What you’ll learn</h4>
+            <ul className="mt-3 space-y-2 text-graphite/90 list-disc pl-5 marker:text-cobalt">
+              {c.outcomes.map((o) => (
+                <li key={o}>{o}</li>
+              ))}
+            </ul>
+
+            <p className="mt-6 text-muted">
+              <span className="font-semibold text-graphite">Styles:</span> {c.styles.join(', ')}
+            </p>
+
+            <a
+              href="#trial"
+              className="mt-7 self-start font-semibold text-cobalt underline decoration-2 underline-offset-[6px] decoration-cobalt/30 hover:decoration-cobalt transition-colors"
             >
-              <div className="flex items-start justify-between gap-4">
-                <span
-                  className={`w-14 h-14 rounded-2xl flex items-center justify-center ${
-                    dark ? 'bg-coral text-white' : 'bg-gold/30 text-plum'
-                  }`}
-                >
-                  <Icon className="w-7 h-7" aria-hidden="true" />
-                </span>
-                <span className={`text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full ${dark ? 'bg-white/10 text-gold' : 'bg-sand text-plum'}`}>
-                  Beginner → Advanced
-                </span>
-              </div>
-
-              <h3 className={`mt-6 text-3xl sm:text-4xl font-extrabold ${dark ? 'text-white' : 'text-plum'}`}>{c.title}</h3>
-              <p className={`mt-1 font-medium ${dark ? 'text-gold' : 'text-coral'}`}>{c.kicker}</p>
-              <p className={`mt-4 leading-relaxed ${dark ? 'text-white/75' : 'text-muted'}`}>{c.summary}</p>
-
-              <ul className="mt-6 space-y-2.5">
-                {c.outcomes.map((o) => (
-                  <li key={o} className="flex gap-3">
-                    <Check className={`w-5 h-5 mt-0.5 shrink-0 ${dark ? 'text-gold' : 'text-coral'}`} aria-hidden="true" />
-                    <span className={dark ? 'text-white/90' : 'text-ink/85'}>{o}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-6 flex flex-wrap gap-2">
-                {c.styles.map((s) => (
-                  <span key={s} className={`text-sm px-3 py-1 rounded-full ${dark ? 'bg-white/10 text-white/85' : 'bg-cream text-ink/75 border border-line'}`}>
-                    {s}
-                  </span>
-                ))}
-              </div>
-
-              <a
-                href="#trial"
-                className={`mt-8 self-start inline-flex items-center gap-2 font-bold ${dark ? 'text-gold hover:text-white' : 'text-coral hover:text-coral-dark'} transition-colors`}
-              >
-                Try a free {c.title.toLowerCase()} class <ArrowRight className="w-4 h-4" aria-hidden="true" />
-              </a>
-            </article>
-          );
-        })}
+              Try a free {c.title.toLowerCase()} class
+            </a>
+          </article>
+        ))}
       </div>
     </div>
   </section>

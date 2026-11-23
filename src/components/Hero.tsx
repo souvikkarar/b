@@ -1,101 +1,58 @@
 import React from 'react';
-import { ArrowRight, Guitar, MicVocal, Video } from 'lucide-react';
-
-const EQ_HEIGHTS = [38, 62, 48, 80, 56, 92, 64, 44, 72, 52, 86, 40, 66, 50];
+import { ChordDiagram } from './Illustrations';
 
 export const Hero: React.FC = () => (
-  <section id="top" className="relative overflow-hidden">
-    {/* soft background shapes */}
-    <div className="pointer-events-none absolute -top-24 -right-24 w-[420px] h-[420px] rounded-full bg-gold/25 blur-3xl" aria-hidden="true" />
-    <div className="pointer-events-none absolute top-1/2 -left-32 w-[360px] h-[360px] rounded-full bg-coral/15 blur-3xl" aria-hidden="true" />
-
-    <div className="relative max-w-6xl mx-auto px-4 sm:px-6 pt-10 pb-16 sm:pt-16 sm:pb-24 grid lg:grid-cols-2 gap-12 lg:gap-10 items-center">
-      {/* Copy */}
+  <section id="top" className="bg-cobalt text-white">
+    <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-10 pb-20 sm:pt-16 sm:pb-28 grid lg:grid-cols-[1.25fr_1fr] gap-14 lg:gap-12 items-center">
       <div>
-        <p className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-line text-sm font-medium text-plum">
-          <span className="w-2 h-2 rounded-full bg-coral" aria-hidden="true" />
-          Live online lessons · Guitar & Western Vocals
-        </p>
-
-        <h1 className="mt-6 text-[2.6rem] leading-[1.05] sm:text-6xl font-extrabold text-plum">
-          From first chord
-          <br />
-          to <span className="relative whitespace-nowrap text-coral">
-            first stage
-            <svg className="absolute left-0 -bottom-2 w-full h-3" viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M2 9 C 50 2, 150 2, 198 8" fill="none" stroke="#FFC24B" strokeWidth="4" strokeLinecap="round" />
-            </svg>
-          </span>
-          .
+        <h1 className="text-[2.9rem] leading-[1.02] sm:text-7xl lg:text-[5.4rem] font-bold tracking-[-0.035em]">
+          From first chord to first stage.
         </h1>
 
-        <p className="mt-6 text-lg sm:text-xl text-muted max-w-xl leading-relaxed">
+        <p className="mt-7 text-lg sm:text-xl text-white/85 max-w-[34rem] leading-relaxed">
           Learn guitar or western vocals with a mentor who teaches only you — live, 1-on-1, from home.
           A clear level-by-level path for complete beginners and returning players alike.
         </p>
 
-        <div className="mt-8 flex flex-col sm:flex-row gap-3">
+        <div className="mt-9 flex flex-col sm:flex-row gap-3">
           <a
             href="#trial"
-            className="inline-flex justify-center items-center gap-2 px-7 py-4 rounded-full bg-coral hover:bg-coral-dark text-white text-base font-bold shadow-[0_10px_24px_-10px_rgba(255,92,57,0.8)] transition-colors"
+            className="inline-flex justify-center items-center h-14 px-7 rounded-md bg-pick text-graphite text-lg font-semibold hover:bg-white transition-colors"
           >
             Book a free trial class
-            <ArrowRight className="w-5 h-5" aria-hidden="true" />
           </a>
           <a
             href="#courses"
-            className="inline-flex justify-center items-center px-7 py-4 rounded-full border-2 border-plum/15 hover:border-plum/40 text-plum text-base font-bold transition-colors"
+            className="inline-flex justify-center items-center h-14 px-7 rounded-md ring-2 ring-inset ring-white/40 hover:ring-white text-white text-lg font-semibold transition-shadow"
           >
             Explore courses
           </a>
         </div>
 
-        <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
-          <li>✓ No experience needed</li>
-          <li>✓ Kids, teens & adults</li>
-          <li>✓ Flexible timings</li>
-        </ul>
+        <p className="mt-7 text-white/70">
+          No experience needed. For kids, teens and adults, at times that suit you.
+        </p>
       </div>
 
-      {/* Illustration */}
-      <div className="relative mx-auto w-full max-w-[480px]" aria-hidden="true">
-        <div className="relative aspect-[5/6] rounded-[2rem] bg-plum overflow-hidden shadow-[0_30px_60px_-30px_rgba(42,30,74,0.8)]">
-          {/* guitar sound-hole + strings */}
-          <svg viewBox="0 0 400 480" className="absolute inset-0 w-full h-full">
-            <circle cx="200" cy="205" r="120" fill="#3B2C63" />
-            <circle cx="200" cy="205" r="82" fill="#17131F" />
-            <circle cx="200" cy="205" r="120" fill="none" stroke="#FFC24B" strokeWidth="3" strokeDasharray="2 10" strokeLinecap="round" />
-            {[0, 1, 2, 3, 4, 5].map((i) => (
-              <line key={i} x1={160 + i * 16} y1="0" x2={160 + i * 16} y2="480" stroke="#F2E9DC" strokeOpacity={0.75 - i * 0.07} strokeWidth={2.6 - i * 0.3} />
-            ))}
-            <rect x="140" y="360" width="120" height="18" rx="4" fill="#FF5C39" />
-          </svg>
-
-          {/* equaliser */}
-          <div className="absolute inset-x-6 bottom-6 h-20 flex items-end justify-between gap-1.5">
-            {EQ_HEIGHTS.map((h, i) => (
-              <span
-                key={i}
-                className="eq-bar flex-1 rounded-full bg-gradient-to-t from-coral to-gold"
-                style={{ height: `${h}%`, animationDelay: `${(i % 7) * 0.12}s` }}
-              />
-            ))}
+      {/* The page's signature: a teacher's chord chart */}
+      <figure className="relative mx-auto w-full max-w-[400px] lg:rotate-[2deg]">
+        <div className="bg-paper text-graphite rounded-xl px-7 pt-6 pb-8 shadow-[0_24px_50px_-24px_rgba(10,15,60,0.65)]">
+          <div className="flex items-baseline justify-between">
+            <span className="font-hand text-4xl font-bold">G major</span>
+            <span className="font-hand text-2xl text-muted">lesson 1</span>
           </div>
+          <ChordDiagram
+            animate
+            title="Chord chart for G major: second fret A string with finger 1, third fret low E with finger 2, third fret high E with finger 3"
+            frets={[3, 2, 0, 0, 0, 3]}
+            fingers={[2, 1, null, null, null, 3]}
+            className="w-full max-w-[260px] mx-auto mt-2"
+          />
+          <figcaption className="font-hand text-[1.7rem] leading-tight text-cobalt mt-2 text-center">
+            the first chord most of us learn — <br className="hidden sm:block" />yours could be next week
+          </figcaption>
         </div>
-
-        {/* floating chips */}
-        <div className="absolute -left-3 sm:-left-8 top-10 flex items-center gap-2.5 bg-white rounded-2xl px-4 py-3 shadow-lg border border-line">
-          <span className="w-9 h-9 rounded-xl bg-coral/10 text-coral flex items-center justify-center"><Guitar className="w-5 h-5" /></span>
-          <span className="text-sm font-bold text-plum leading-tight">Guitar<br /><span className="font-medium text-muted">Acoustic & electric</span></span>
-        </div>
-        <div className="absolute -right-2 sm:-right-6 top-1/2 flex items-center gap-2.5 bg-white rounded-2xl px-4 py-3 shadow-lg border border-line">
-          <span className="w-9 h-9 rounded-xl bg-gold/25 text-plum flex items-center justify-center"><MicVocal className="w-5 h-5" /></span>
-          <span className="text-sm font-bold text-plum leading-tight">Vocals<br /><span className="font-medium text-muted">Pop to musical theatre</span></span>
-        </div>
-        <div className="absolute left-6 -bottom-5 flex items-center gap-2 bg-gold rounded-full px-4 py-2 shadow-lg text-plum text-sm font-bold">
-          <Video className="w-4 h-4" /> Live 1-on-1
-        </div>
-      </div>
+      </figure>
     </div>
   </section>
 );
