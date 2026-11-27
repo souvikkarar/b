@@ -1,0 +1,289 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Img from '../components/Img.astro';
+import CourseGrid from '../components/CourseGrid.astro';
+import Faq from '../components/Faq.astro';
+import { CONTACT, SOCIAL } from '../config/site.config';
+import { GALLERY } from '../data/concerts';
+import { FACILITIES } from '../data/studio';
+import { TESTIMONIALS } from '../data/testimonials';
+import { HOME_FAQS, WHY_MUZICKS } from '../data/home';
+import { whatsappLink } from '../lib/whatsapp';
+import { faqSchema } from '../lib/schema';
+
+const a = CONTACT.address;
+---
+
+<BaseLayout
+  title="Muzicks | Music Academy in Kolkata — Online & Offline Classes"
+  description="Music academy in Kolkata for guitar, keyboard, vocals, violin, flute and more — in person or online. Plus live performances and studio sessions."
+  schema={[faqSchema(HOME_FAQS)]}
+>
+  <!-- 1. Hero -->
+  <section class="relative overflow-hidden bg-midnight text-ivory">
+    <div class="wrap grid items-center gap-12 pb-16 pt-12 sm:pt-16 lg:grid-cols-[1.2fr_1fr] lg:gap-10 lg:pb-24">
+      <div>
+        <h1 class="display-xl">
+          Discover your rhythm.
+          <span class="mt-3 block font-medium italic text-brass">Learn. Perform. Create.</span>
+        </h1>
+        <p class="lead mt-8 max-w-xl text-ivory/80">
+          Explore the world of music with Muzicks. Learn instruments and vocals, experience live performances
+          and connect with a creative music community — in Kolkata and online.
+        </p>
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+          <a href="/academy/" class="btn btn-brass">Explore Music Academy</a>
+          <a href="/concerts/" class="btn btn-outline-light">Discover our performances</a>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="overflow-hidden rounded-t-[12rem] rounded-b-[1.75rem]">
+          <Img image="heroPerformer" ratio={4 / 5} eager widths={[480, 760, 1100]} sizes="(min-width: 1024px) 40vw, 90vw" class="h-full w-full" />
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-white/10">
+      <ul class="wrap grid grid-cols-3 text-center text-sm text-ivory/70 sm:text-base">
+        <li class="py-5"><a href="/academy/" class="hover:text-brass">Music Academy</a></li>
+        <li class="border-x border-white/10 py-5"><a href="/concerts/" class="hover:text-ember">Concerts & events</a></li>
+        <li class="py-5"><a href="/studio/" class="hover:text-teal">Studio & jamming</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 2. Brand introduction -->
+  <section class="wrap py-20 sm:py-28">
+    <div class="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
+      <p class="font-[family-name:var(--font-display)] text-[clamp(1.9rem,3.4vw,3rem)] leading-[1.15]" data-reveal>
+        Muzicks is a music academy in Kolkata for anyone who wants to make music — children taking their first
+        lesson, adults returning to an old dream, and musicians looking for a stage or a space to play.
+      </p>
+      <div class="space-y-5 text-stone lg:pt-3">
+        <p>
+          We teach instruments and voice across Western and Indian traditions, in person at our Kolkata academy and
+          through live online lessons for students in other cities and countries.
+        </p>
+        <p>
+          Beyond the classroom, Muzicks performs live and is building creative spaces where musicians can rehearse,
+          jam and collaborate.
+        </p>
+        <a href="/about/" class="link-underline inline-block font-semibold text-midnight decoration-brass">Our story</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Three core experiences -->
+  <section aria-labelledby="experiences-title" class="pb-8">
+    <h2 id="experiences-title" class="sr-only">Learn, perform and create with Muzicks</h2>
+
+    <article class="wrap grid items-center gap-10 py-10 lg:grid-cols-2 lg:gap-16" data-reveal>
+      <div class="overflow-hidden rounded-[1.75rem]">
+        <Img image="youngLearner" ratio={5 / 4} widths={[480, 800, 1200]} class="h-full w-full" />
+      </div>
+      <div>
+        <p class="kicker text-brass-deep">Learn</p>
+        <h3 class="display-md mt-2">Music Academy</h3>
+        <p class="lead mt-5 max-w-lg text-stone">
+          Professional music education for children and adults. Nine courses across instruments and voice, taught
+          in person in Kolkata and online.
+        </p>
+        <a href="/academy/" class="btn btn-dark mt-8">Explore the Academy</a>
+      </div>
+    </article>
+
+    <article class="mt-10 bg-midnight text-ivory" data-reveal>
+      <div class="wrap grid items-center gap-10 py-16 lg:grid-cols-2 lg:gap-16 lg:py-20">
+        <div class="lg:order-2 overflow-hidden rounded-[1.75rem]">
+          <Img image="stageLight" ratio={5 / 4} widths={[480, 800, 1200]} class="h-full w-full" />
+        </div>
+        <div>
+          <p class="kicker text-ember">Perform</p>
+          <h3 class="display-md mt-2">Concerts & events</h3>
+          <p class="lead mt-5 max-w-lg text-ivory/75">
+            Live music for corporate events, private celebrations, cultural evenings and festivals. Discover our
+            performances and talk to us about bringing Muzicks to your event.
+          </p>
+          <a href="/concerts/" class="btn btn-ember mt-8">Explore concerts</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="bg-teal-deep text-ivory" data-reveal>
+      <div class="wrap grid items-center gap-10 py-16 lg:grid-cols-2 lg:gap-16 lg:py-20">
+        <div class="overflow-hidden rounded-[1.75rem]">
+          <Img image="mixer" ratio={5 / 4} widths={[480, 800, 1200]} class="h-full w-full" />
+        </div>
+        <div>
+          <p class="kicker text-[#8fd3c9]">Create</p>
+          <h3 class="display-md mt-2">Studio & jamming</h3>
+          <p class="lead mt-5 max-w-lg text-ivory/80">
+            Creative spaces for musicians, singers and bands to practise, rehearse and play together. Facility
+            details are being finalised — enquire to hear first.
+          </p>
+          <a href="/studio/" class="btn mt-8 bg-ivory text-teal-deep hover:bg-white">Explore the studio</a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- 4. Courses -->
+  <section id="courses" class="wrap py-20 sm:py-28">
+    <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+      <div class="max-w-2xl">
+        <h2 class="display-lg">Explore our courses</h2>
+        <p class="lead mt-4 text-stone">Six instruments and three vocal styles, each with its own path from first lesson to performance.</p>
+      </div>
+      <a href="/courses/" class="link-underline font-semibold decoration-brass">View the course directory</a>
+    </div>
+    <div class="mt-10"><CourseGrid /></div>
+  </section>
+
+  <!-- 5. Every generation -->
+  <section class="bg-sand py-20 sm:py-28">
+    <div class="wrap">
+      <h2 class="display-lg max-w-3xl">Music learning for every generation</h2>
+      <div class="mt-14 grid gap-14 md:grid-cols-2 md:gap-10">
+        {[
+          { title: 'For young learners', image: 'youngLearner', points: ['Encourage musical curiosity', 'Build strong musical foundations', 'Develop confidence and creativity'], text: 'Patient, age-appropriate lessons that make practice something children look forward to. Parents can enquire directly and we will suggest the right starting point.' },
+          { title: 'For adult learners', image: 'adultLearner', points: ['Start learning from scratch', 'Develop the skills you already have', 'Explore music as a creative pursuit'], text: 'Whether you are picking up an instrument for the first time or returning after years away, lessons move at your pace and around your schedule.' },
+        ].map((g) => (
+          <article data-reveal>
+            <div class="overflow-hidden rounded-[1.5rem]">
+              <Img image={g.image} ratio={3 / 2} widths={[480, 800, 1100]} sizes="(min-width: 768px) 45vw, 100vw" class="h-full w-full" />
+            </div>
+            <h3 class="mt-7 text-4xl">{g.title}</h3>
+            <p class="mt-3 max-w-lg text-stone">{g.text}</p>
+            <ul class="mt-5 space-y-2">
+              {g.points.map((p) => <li class="flex gap-3"><span class="mt-[0.7rem] h-px w-5 shrink-0 bg-brass-deep" aria-hidden="true"></span>{p}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Online & offline -->
+  <section class="wrap py-20 sm:py-28">
+    <div class="grid gap-12 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
+      <div>
+        <h2 class="display-lg">In Kolkata or online — your choice</h2>
+        <p class="lead mt-5 text-stone">Tell us about the learner and we will share the options, timings and next steps for your course.</p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href="/contact/?type=course" class="btn btn-dark">Make a course enquiry</a>
+          {whatsappLink('course') && <a href={whatsappLink('course')} target="_blank" rel="noopener" class="btn btn-outline-dark">Ask on WhatsApp</a>}
+        </div>
+      </div>
+      <div class="grid gap-px overflow-hidden rounded-[1.75rem] bg-line sm:grid-cols-2">
+        <div class="bg-ivory p-8">
+          <h3 class="text-3xl">Offline classes</h3>
+          <p class="mt-3 text-stone">Learn in person at the Muzicks academy in {a.locality}, {a.city}.</p>
+          <address class="mt-5 not-italic text-[0.95rem]">{a.street}, {a.locality}<br />{a.city} {a.postalCode}</address>
+        </div>
+        <div class="bg-ivory p-8">
+          <h3 class="text-3xl">Online lessons</h3>
+          <p class="mt-3 text-stone">Live lessons with a Muzicks teacher, wherever you are in India or abroad.</p>
+          <p class="mt-5 text-[0.95rem]">Personalised to your level and goals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Concerts -->
+  <section class="bg-midnight py-20 text-ivory sm:py-28">
+    <div class="wrap">
+      <div class="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+        <div class="max-w-2xl">
+          <p class="kicker text-ember">Perform</p>
+          <h2 class="display-lg mt-2">Live music, made for your occasion</h2>
+          <p class="lead mt-5 text-ivory/75">From intimate acoustic sets to stage performances, Muzicks brings live music to corporate, private and cultural events.</p>
+        </div>
+        <div class="flex flex-col gap-3 sm:flex-row">
+          <a href="/concerts/" class="btn btn-ember">Explore concerts</a>
+          <a href="/concerts/#book" class="btn btn-outline-light">Book Muzicks for an event</a>
+        </div>
+      </div>
+
+      <div class="mt-14 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:grid-rows-2">
+        {GALLERY.slice(0, 5).map((g, i) => (
+          <figure class:list={['relative overflow-hidden rounded-2xl', i === 0 && 'col-span-2 row-span-2']}>
+            <Img image={g.image} ratio={i === 0 ? 1 : 4 / 3} widths={i === 0 ? [600, 1000, 1400] : [360, 600]} sizes={i === 0 ? '(min-width:1024px) 50vw, 100vw' : '(min-width:1024px) 25vw, 50vw'} class="h-full w-full" />
+          </figure>
+        ))}
+      </div>
+      <p class="mt-4 text-sm text-mist">Illustrative photographs. Muzicks performance photos coming soon.</p>
+      {SOCIAL.youtube && (
+        <a href={SOCIAL.youtube} target="_blank" rel="noopener" class="link-underline mt-8 inline-block font-semibold decoration-ember">Watch performances on YouTube</a>
+      )}
+    </div>
+  </section>
+
+  <!-- 8. Studio -->
+  <section class="bg-teal-deep py-20 text-ivory sm:py-28">
+    <div class="wrap">
+      <div class="max-w-2xl">
+        <p class="kicker text-[#8fd3c9]">Create</p>
+        <h2 class="display-lg mt-2">Studio & creative spaces</h2>
+        <p class="lead mt-5 text-ivory/80">Spaces to practise, rehearse and jam. We are finalising the details of each room — follow along or send an enquiry.</p>
+      </div>
+      <ul class="mt-12 grid gap-6 md:grid-cols-3">
+        {FACILITIES.map((f) => (
+          <li class="overflow-hidden rounded-[1.5rem] bg-white/[0.06] ring-1 ring-inset ring-white/10">
+            <Img image={f.image} ratio={4 / 3} widths={[400, 700]} sizes="(min-width:768px) 30vw, 100vw" class="w-full" />
+            <div class="p-6">
+              <div class="flex items-center justify-between gap-3">
+                <h3 class="text-3xl">{f.name}</h3>
+                {!f.confirmed && <span class="rounded-full bg-white/10 px-3 py-1 text-xs text-ivory/80">Details coming soon</span>}
+              </div>
+              <p class="mt-2 text-ivory/75">{f.description}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <a href="/studio/" class="btn mt-10 bg-ivory text-teal-deep hover:bg-white">Explore studio facilities</a>
+    </div>
+  </section>
+
+  <!-- 9. Why Muzicks -->
+  <section class="wrap py-20 sm:py-28">
+    <div class="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-20">
+      <h2 class="display-lg">Why Muzicks</h2>
+      <dl class="grid gap-x-12 gap-y-10 sm:grid-cols-2">
+        {WHY_MUZICKS.map((w) => (
+          <div class="border-t border-line pt-6">
+            <dt class="text-3xl font-[family-name:var(--font-display)] font-semibold">{w.title}</dt>
+            <dd class="mt-2 text-stone">{w.text}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- 10. Testimonials (hidden until real testimonials are added) -->
+  {TESTIMONIALS.length > 0 && (
+    <section class="bg-sand py-20 sm:py-28">
+      <div class="wrap">
+        <h2 class="display-lg">In their words</h2>
+        <ul class="mt-12 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+          {TESTIMONIALS.map((t) => (
+            <li>
+              <blockquote class="font-[family-name:var(--font-display)] text-2xl leading-snug">“{t.quote}”</blockquote>
+              <p class="mt-4 font-semibold">{t.name}</p>
+              <p class="text-sm text-stone">{t.role}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <!-- 11. FAQs -->
+  <section class="wrap pb-24">
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-20">
+      <div>
+        <h2 class="display-lg">Questions, answered</h2>
+        <p class="mt-4 text-stone">Something else on your mind? <a href="/contact/" class="link-underline decoration-brass">Get in touch</a>.</p>
+      </div>
+      <Faq faqs={HOME_FAQS} />
+    </div>
+  </section>
+</BaseLayout>

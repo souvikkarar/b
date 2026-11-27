@@ -1,0 +1,18 @@
+# Redirects from the previous muzicks.com (WordPress) URLs to the new structure.
+# Format: <from> <to> <status>. Add more as you find old URLs in Search Console.
+/about-muzicks              /about/                    301
+/about-muzicks/             /about/                    301
+/contact-us                 /contact/                  301
+/contact-us/                /contact/                  301
+/ukulele-classes-in-kolkata  /courses/ukulele/         301
+/ukulele-classes-in-kolkata/ /courses/ukulele/         301
+/western-vocal               /courses/western-vocals/  301
+/western-vocal/              /courses/western-vocals/  301
+/guitar-training             /courses/guitar/          301
+/guitar-training/            /courses/guitar/          301
+/acoustic-guitar             /courses/guitar/          301
+/acoustic-guitar/            /courses/guitar/          301
+/electric-guitar             /courses/guitar/          301
+/electric-guitar/            /courses/guitar/          301
+/gallery                     /concerts/                301
+/gallery/                    /concerts/                301

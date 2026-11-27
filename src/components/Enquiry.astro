@@ -1,0 +1,33 @@
+---
+/** Server wrapper that feeds central config into the interactive EnquiryForm island. */
+import EnquiryForm, { type FormKind } from './EnquiryForm';
+import { CONTACT, FORMS } from '../config/site.config';
+import { COURSES } from '../data/courses';
+import { EVENT_TYPES } from '../data/concerts';
+import { FACILITIES, STUDIO_SERVICES } from '../data/studio';
+
+export interface Props {
+  kind: FormKind;
+  defaultCourse?: string;
+  submitLabel?: string;
+  buttonClass?: string;
+}
+const { kind, defaultCourse, submitLabel, buttonClass } = Astro.props;
+---
+<EnquiryForm
+  client:load
+  kind={kind}
+  endpoint={FORMS.endpoint}
+  turnstileSiteKey={FORMS.turnstileSiteKey}
+  whatsapp={CONTACT.whatsapp}
+  phone={CONTACT.phone}
+  phoneDisplay={CONTACT.phoneDisplay}
+  email={CONTACT.email}
+  courses={COURSES.map((c) => c.name)}
+  facilities={FACILITIES.map((f) => f.name)}
+  eventTypes={EVENT_TYPES.map((e) => e.name)}
+  studioPurposes={STUDIO_SERVICES.map((s) => s.name)}
+  defaultCourse={defaultCourse}
+  submitLabel={submitLabel}
+  buttonClass={buttonClass}
+/>

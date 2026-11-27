@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Img from '../../components/Img.astro';
+import { FOUNDER, PHILOSOPHY } from '../../data/about';
+import { breadcrumbSchema, personSchema } from '../../lib/schema';
+
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'About', href: '/about/' }];
+const initials = FOUNDER.name.split(' ').map((w) => w[0]).join('');
+---
+
+<BaseLayout
+  title="About Muzicks | Music Academy in Kolkata & Founder Debika Karar"
+  description="Muzicks is a music academy in Kolkata founded by musician Debika Karar. Learn about our story, teaching approach, performances and creative spaces."
+  schema={[breadcrumbSchema(crumbs), personSchema({ name: FOUNDER.name, role: FOUNDER.role, description: FOUNDER.bio.join(' '), image: FOUNDER.portrait || undefined })]}
+>
+  <PageHero
+    title="Music, learned and lived"
+    kicker="About Muzicks"
+    lead="A music academy in Kolkata built by a working musician — where students learn, perform and create."
+    image="guitar"
+    breadcrumbs={crumbs}
+  />
+
+  <section class="wrap py-20 sm:py-28">
+    <div class="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
+      <h2 class="display-md">Our story</h2>
+      <div class="space-y-5 text-stone">
+        <p class="lead text-midnight">
+          Muzicks began with a simple belief: that good music teaching changes how people listen, play and feel about music for the rest of their lives.
+        </p>
+        <p>
+          What started as guitar and vocal lessons has grown into an academy teaching instruments and voice across Western and Indian traditions, in person in Kolkata and online for students further afield.
+        </p>
+        <p>Alongside teaching, Muzicks performs live and is developing creative spaces where musicians can rehearse and play together.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-midnight py-20 text-ivory sm:py-28">
+    <div class="wrap grid items-center gap-12 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
+      <figure class="overflow-hidden rounded-[1.75rem] bg-midnight-2">
+        {FOUNDER.portrait ? (
+          <Img image={FOUNDER.portrait} alt={`Portrait of ${FOUNDER.name}`} ratio={4 / 5} widths={[480, 800]} class="w-full" />
+        ) : (
+          <div class="grid aspect-[4/5] place-items-center">
+            <span class="font-[family-name:var(--font-display)] text-[8rem] leading-none text-brass/80" aria-hidden="true">{initials}</span>
+          </div>
+        )}
+      </figure>
+      <div>
+        <p class="kicker text-brass">Founder</p>
+        <h2 class="display-md mt-2">{FOUNDER.name}</h2>
+        <p class="mt-1 text-mist">{FOUNDER.role}</p>
+        <div class="mt-6 space-y-4 text-ivory/85">{FOUNDER.bio.map((p) => <p>{p}</p>)}</div>
+        <ul class="mt-8 flex flex-wrap gap-2">
+          {FOUNDER.highlights.map((h) => <li class="rounded-full px-4 py-2 text-sm ring-1 ring-inset ring-white/20">{h}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap py-20 sm:py-28">
+    <h2 class="display-md">Our philosophy and teaching approach</h2>
+    <ul class="mt-12 grid gap-10 md:grid-cols-3">
+      {PHILOSOPHY.map((p) => (
+        <li class="border-t border-line pt-6"><h3 class="text-3xl">{p.title}</h3><p class="mt-2 text-stone">{p.text}</p></li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="bg-sand py-20 sm:py-28">
+    <div class="wrap grid gap-6 md:grid-cols-3">
+      {[
+        { title: 'Musical expertise', text: 'Instruments and voice across Western and Indian traditions — nine courses in all.', href: '/courses/', cta: 'See all courses', image: 'keyboard' },
+        { title: 'Performance', text: 'Live music for concerts, celebrations and events.', href: '/concerts/', cta: 'Explore concerts', image: 'bandOnStage' },
+        { title: 'Creative spaces', text: 'Studio and jamming spaces for musicians, being set up now.', href: '/studio/', cta: 'Explore the studio', image: 'rehearsal' },
+      ].map((c) => (
+        <a href={c.href} class="group block">
+          <div class="overflow-hidden rounded-[1.5rem]"><Img image={c.image} ratio={4 / 3} widths={[400, 700]} sizes="(min-width:768px) 30vw, 100vw" class="w-full transition-transform duration-700 group-hover:scale-[1.04]" /></div>
+          <h2 class="mt-5 text-3xl">{c.title}</h2>
+          <p class="mt-1 text-stone">{c.text}</p>
+          <span class="link-underline mt-3 inline-block font-semibold decoration-brass">{c.cta}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

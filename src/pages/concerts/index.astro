@@ -1,0 +1,184 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Img from '../../components/Img.astro';
+import Faq from '../../components/Faq.astro';
+import Enquiry from '../../components/Enquiry.astro';
+import { PERFORMANCES, VIDEOS, COLLABORATIONS, GALLERY, EVENT_TYPES, FORMATS, CONCERT_FAQS } from '../../data/concerts';
+import { SOCIAL } from '../../config/site.config';
+import { whatsappLink } from '../../lib/whatsapp';
+import { breadcrumbSchema, faqSchema } from '../../lib/schema';
+import { SITE, CONTACT } from '../../config/site.config';
+
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Concerts', href: '/concerts/' }];
+const wa = whatsappLink('concert');
+const fmtDate = (d: string) => new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+
+// Event schema only for real, listed performances
+const eventSchemas = PERFORMANCES.map((p) => ({
+  '@context': 'https://schema.org',
+  '@type': 'MusicEvent',
+  name: p.title,
+  startDate: p.date,
+  location: { '@type': 'Place', name: p.venue, address: p.city },
+  performer: { '@type': 'MusicGroup', name: SITE.name },
+  organizer: { '@type': 'Organization', name: SITE.name, url: SITE.url },
+}));
+---
+
+<BaseLayout
+  title="Live Music Performance Booking in Kolkata | Muzicks"
+  description="Book Muzicks for live music at corporate events, private celebrations, cultural evenings and college festivals in Kolkata. Send a booking enquiry."
+  schema={[breadcrumbSchema(crumbs), faqSchema(CONCERT_FAQS), ...eventSchemas]}
+  whatsappKind="concert"
+>
+  <!-- Cinematic hero -->
+  <section class="relative isolate overflow-hidden bg-midnight text-ivory">
+    <div class="absolute inset-0 -z-10">
+      <Img image="concertCrowd" ratio={16 / 9} eager widths={[800, 1400, 2000]} sizes="100vw" class="h-full w-full opacity-45" />
+      <div class="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/60 to-midnight/20"></div>
+    </div>
+    <div class="wrap pb-20 pt-8 sm:pt-10 lg:pb-28">
+      <Breadcrumbs items={crumbs} light />
+      <p class="kicker mt-24 text-ember sm:mt-36">Perform</p>
+      <h1 class="display-xl mt-3 max-w-5xl">Bring Muzicks to your event.</h1>
+      <p class="lead mt-6 max-w-2xl text-ivory/85">
+        Live music for corporate gatherings, private celebrations, cultural evenings, college festivals and brand moments — shaped around your audience and occasion.
+      </p>
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+        <a href="#book" class="btn btn-ember">Send a booking enquiry</a>
+        {wa && <a href={wa} target="_blank" rel="noopener" class="btn btn-outline-light">Enquire on WhatsApp</a>}
+      </div>
+    </div>
+  </section>
+
+  <!-- Introduction -->
+  <section class="wrap py-20 sm:py-28">
+    <div class="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
+      <p class="font-[family-name:var(--font-display)] text-[clamp(1.9rem,3.2vw,2.9rem)] leading-[1.15]">
+        Every event has its own sound. We listen to what you are planning — the room, the guests, the moment —
+        and shape a performance that fits.
+      </p>
+      <p class="text-stone lg:pt-3">
+        Muzicks performances draw on the same musicianship that runs through our academy: Western and Indian
+        repertoire, acoustic and amplified formats, and set lists built around your occasion.
+      </p>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="bg-midnight py-20 text-ivory sm:py-28" aria-labelledby="gallery-title">
+    <div class="wrap">
+      <h2 id="gallery-title" class="display-md">Performance gallery</h2>
+      <div class="mt-12 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
+        {GALLERY.map((g, i) => (
+          <figure class:list={['relative overflow-hidden rounded-2xl', i === 0 && 'col-span-2 lg:row-span-2']}>
+            <Img image={g.image} ratio={i === 0 ? 4 / 3 : 1} widths={[400, 700, 1100]} sizes={i === 0 ? '(min-width:1024px) 66vw, 100vw' : '(min-width:1024px) 33vw, 50vw'} class="h-full w-full" />
+            <figcaption class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4 text-sm text-ivory/90">{g.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+      {GALLERY.some((g) => g.illustrative) && (
+        <p class="mt-4 text-sm text-mist">Illustrative photographs. Muzicks performance photography is being added.</p>
+      )}
+    </div>
+  </section>
+
+  <!-- Videos -->
+  <section class="wrap py-20 sm:py-28" aria-labelledby="videos-title">
+    <div class="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+      <h2 id="videos-title" class="display-md">Watch and listen</h2>
+      {SOCIAL.youtube && <a href={SOCIAL.youtube} target="_blank" rel="noopener" class="link-underline font-semibold decoration-ember">Visit our YouTube channel</a>}
+    </div>
+    {VIDEOS.length > 0 ? (
+      <ul class="mt-10 grid gap-6 md:grid-cols-2">
+        {VIDEOS.map((v) => (
+          <li>
+            <a href={`https://www.youtube.com/watch?v=${v.youtubeId}`} target="_blank" rel="noopener" class="group block">
+              <div class="relative overflow-hidden rounded-2xl">
+                <img src={`https://i.ytimg.com/vi/${v.youtubeId}/hqdefault.jpg`} alt="" width="480" height="360" loading="lazy" class="aspect-video w-full object-cover" />
+                <span class="absolute inset-0 grid place-items-center"><span class="grid h-16 w-16 place-items-center rounded-full bg-ember text-white">▶</span></span>
+              </div>
+              <p class="mt-3 text-2xl font-[family-name:var(--font-display)] font-semibold">{v.title}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="mt-6 max-w-xl text-stone">Performance videos are on our YouTube channel while we curate highlights for this page.</p>
+    )}
+  </section>
+
+  <!-- Past concerts -->
+  <section class="bg-sand py-20 sm:py-28" aria-labelledby="past-title">
+    <div class="wrap grid gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-20">
+      <h2 id="past-title" class="display-md">Past concerts</h2>
+      {PERFORMANCES.length > 0 ? (
+        <ul class="border-t border-line">
+          {PERFORMANCES.map((p) => (
+            <li class="grid gap-1 border-b border-line py-6 sm:grid-cols-[10rem_1fr]">
+              <time datetime={p.date} class="text-stone">{fmtDate(p.date)}</time>
+              <div><h3 class="text-2xl">{p.title}</h3><p class="text-stone">{p.venue}, {p.city}</p></div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="text-stone lg:pt-3">Our performance archive is being updated. Ask us about recent work when you enquire.</p>
+      )}
+    </div>
+  </section>
+
+  {COLLABORATIONS.length > 0 && (
+    <section class="wrap py-20" aria-labelledby="collab-title">
+      <h2 id="collab-title" class="display-md">Brand collaborations</h2>
+      <ul class="mt-10 flex flex-wrap items-center gap-10">
+        {COLLABORATIONS.map((c) => <li>{c.logo ? <img src={c.logo} alt={c.name} class="h-10 w-auto" loading="lazy" /> : <span class="text-xl">{c.name}</span>}</li>)}
+      </ul>
+    </section>
+  )}
+
+  <!-- Event types + formats -->
+  <section class="wrap py-20 sm:py-28">
+    <div class="grid gap-16 lg:grid-cols-2 lg:gap-20">
+      <div>
+        <h2 class="display-md">Events we can play</h2>
+        <p class="mt-3 text-stone">Tell us about your occasion — these are the kinds of events we are happy to discuss.</p>
+        <ul class="mt-8 border-t border-line">
+          {EVENT_TYPES.map((e) => (
+            <li class="border-b border-line py-4"><h3 class="font-sans text-lg font-semibold">{e.name}</h3><p class="text-stone">{e.text}</p></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2 class="display-md">Performance formats</h2>
+        <p class="mt-3 text-stone">Formats can be combined or adapted to your venue and budget.</p>
+        <ul class="mt-8 space-y-4">
+          {FORMATS.map((f) => (
+            <li class="rounded-2xl bg-midnight p-6 text-ivory"><h3 class="text-2xl">{f.name}</h3><p class="mt-1 text-mist">{f.text}</p></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking enquiry -->
+  <section id="book" class="scroll-mt-20 bg-midnight py-20 text-ivory sm:py-28">
+    <div class="wrap grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
+      <div>
+        <p class="kicker text-ember">Booking enquiry</p>
+        <h2 class="display-md mt-2">Tell us about your event</h2>
+        <p class="mt-5 text-mist">We will get back to you to discuss availability, format and requirements. A booking is confirmed only after we speak with you.</p>
+        {wa && <a href={wa} target="_blank" rel="noopener" class="btn btn-outline-light mt-8">Enquire on WhatsApp</a>}
+        {CONTACT.phone && <p class="mt-6 text-mist">Or call <a href={`tel:${CONTACT.phone}`} class="text-ivory underline underline-offset-4">{CONTACT.phoneDisplay}</a></p>}
+      </div>
+      <div class="text-midnight"><Enquiry kind="concert" submitLabel="Send booking enquiry" buttonClass="btn-ember" /></div>
+    </div>
+  </section>
+
+  <section class="wrap py-20 sm:py-28">
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-20">
+      <h2 class="display-md">Booking FAQs</h2>
+      <Faq faqs={CONCERT_FAQS} />
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,31 @@
+---
+import Img from './Img.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
+import type { ImageKey } from '../config/images';
+
+export interface Props {
+  title: string;
+  kicker?: string;
+  lead: string;
+  image: ImageKey | string;
+  imageAlt?: string;
+  breadcrumbs: { name: string; href: string }[];
+  /** Accent colour class for the kicker, e.g. 'text-brass' */
+  accent?: string;
+}
+const { title, kicker, lead, image, imageAlt, breadcrumbs, accent = 'text-brass' } = Astro.props;
+---
+<section class="bg-midnight text-ivory">
+  <div class="wrap grid items-end gap-10 pb-14 pt-8 sm:pt-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16 lg:pb-20">
+    <div class="pb-2">
+      <Breadcrumbs items={breadcrumbs} light />
+      {kicker && <p class={`kicker mt-10 ${accent}`}>{kicker}</p>}
+      <h1 class={`display-lg ${kicker ? 'mt-3' : 'mt-10'}`}>{title}</h1>
+      <p class="lead mt-6 max-w-xl text-ivory/80">{lead}</p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row"><slot name="actions" /></div>
+    </div>
+    <div class="overflow-hidden rounded-[1.75rem]">
+      <Img image={image} alt={imageAlt} ratio={5 / 4} eager widths={[560, 900, 1300]} sizes="(min-width: 1024px) 45vw, 100vw" class="h-full w-full" />
+    </div>
+  </div>
+</section>

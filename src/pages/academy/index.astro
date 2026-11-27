@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Img from '../../components/Img.astro';
+import CourseCard from '../../components/CourseCard.astro';
+import Faq from '../../components/Faq.astro';
+import { INSTRUMENTAL, VOCAL } from '../../data/courses';
+import { CONTACT, OFFERS_DEMO_CLASS } from '../../config/site.config';
+import { PHILOSOPHY } from '../../data/about';
+import { whatsappLink } from '../../lib/whatsapp';
+import { breadcrumbSchema, faqSchema } from '../../lib/schema';
+
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Music Academy', href: '/academy/' }];
+const steps = [
+  { title: 'Tell us about the learner', text: 'Share the instrument or style, age, experience and whether you prefer classes in Kolkata or online.' },
+  { title: OFFERS_DEMO_CLASS ? 'Try a demo class' : 'Talk to a teacher', text: 'Meet a teacher, discuss goals and find the right starting level.' },
+  { title: 'Start learning', text: 'Begin regular lessons with clear goals and practice guidance between classes.' },
+];
+const faqs = [
+  { q: 'What age can my child start?', a: 'Many children start between 5 and 8 depending on the instrument. Tell us your child’s age and we will suggest the most suitable course.' },
+  { q: 'I am an adult beginner. Is it too late?', a: 'No. Adults learn very successfully — lessons are paced around your schedule and goals.' },
+  { q: 'Do you offer online classes outside Kolkata?', a: 'Yes. Online lessons are available to students in other cities and countries.' },
+  { q: 'Can I learn more than one instrument?', a: 'Yes. Many students combine an instrument with vocals. Ask us how to plan it.' },
+];
+---
+
+<BaseLayout
+  title="Music Academy in Kolkata for Children & Adults | Muzicks"
+  description="The Muzicks Music Academy in Kolkata teaches guitar, keyboard, violin, flute, ukulele, harmonica and vocals to children and adults — in person and online."
+  schema={[breadcrumbSchema(crumbs), faqSchema(faqs)]}
+  whatsappKind="course"
+>
+  <PageHero
+    title="The Muzicks Music Academy"
+    kicker="Learn"
+    lead="Music lessons for children and adults in Kolkata and online — six instruments, three vocal styles and a teacher who knows your goals."
+    image="guitar"
+    breadcrumbs={crumbs}
+  >
+    <Fragment slot="actions">
+      <a href="/courses/" class="btn btn-brass">Browse all courses</a>
+      <a href="/contact/?type=course" class="btn btn-outline-light">Enquire about a course</a>
+    </Fragment>
+  </PageHero>
+
+  <section class="wrap py-20 sm:py-28">
+    <div class="grid gap-12 lg:grid-cols-[1.3fr_1fr] lg:gap-20">
+      <div>
+        <h2 class="display-md">An academy shaped around each learner</h2>
+        <p class="lead mt-5 text-stone">
+          At Muzicks, a lesson for a seven-year-old looks very different from one for a working professional — and it
+          should. We listen first, then build a path that fits the learner’s age, level and the music they love.
+        </p>
+      </div>
+      <ul class="space-y-8 lg:pt-2">
+        {PHILOSOPHY.map((p) => (
+          <li class="border-t border-line pt-5">
+            <h3 class="text-2xl">{p.title}</h3>
+            <p class="mt-1.5 text-stone">{p.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="bg-sand py-20 sm:py-28">
+    <div class="wrap">
+      <h2 class="display-md">Instrumental training</h2>
+      <ul class="mt-10 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        {INSTRUMENTAL.map((c) => <li><CourseCard course={c} /></li>)}
+      </ul>
+      <h2 class="display-md mt-24">Vocal training</h2>
+      <ul class="mt-10 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        {VOCAL.map((c) => <li><CourseCard course={c} /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap py-20 sm:py-28">
+    <div class="grid gap-10 md:grid-cols-2">
+      {[
+        { title: 'For parents', image: 'youngLearner', text: 'Enquire on behalf of your child in a minute. Tell us their age and interests, and we will recommend a starting course and level. Lessons build focus, confidence and a lifelong love of music.' },
+        { title: 'For adults', image: 'adultLearner', text: 'Start from scratch or build on what you already know. Lessons fit around work and family, and you choose the music you want to play or sing.' },
+      ].map((g) => (
+        <article>
+          <div class="overflow-hidden rounded-[1.5rem]"><Img image={g.image} ratio={3 / 2} widths={[480, 800]} sizes="(min-width:768px) 45vw, 100vw" class="w-full" /></div>
+          <h2 class="mt-7 text-4xl">{g.title}</h2>
+          <p class="mt-3 max-w-lg text-stone">{g.text}</p>
+          <a href="/contact/?type=course" class="link-underline mt-5 inline-block font-semibold decoration-brass">Make an enquiry</a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="bg-midnight py-20 text-ivory sm:py-28">
+    <div class="wrap">
+      <h2 class="display-md max-w-2xl">How to get started</h2>
+      <ol class="mt-12 grid gap-10 md:grid-cols-3">
+        {steps.map((s, i) => (
+          <li class="border-t border-white/15 pt-6">
+            <span class="font-[family-name:var(--font-display)] text-5xl text-brass">{i + 1}</span>
+            <h3 class="mt-3 text-3xl">{s.title}</h3>
+            <p class="mt-2 text-mist">{s.text}</p>
+          </li>
+        ))}
+      </ol>
+      <div class="mt-12 flex flex-col gap-3 sm:flex-row">
+        <a href="/contact/?type=course" class="btn btn-brass">{OFFERS_DEMO_CLASS ? 'Book a demo class' : 'Enquire now'}</a>
+        {whatsappLink('course') && <a href={whatsappLink('course')} target="_blank" rel="noopener" class="btn btn-outline-light">Ask on WhatsApp</a>}
+      </div>
+      <p class="mt-8 text-mist">In-person classes at {CONTACT.address.locality}, {CONTACT.address.city}. Online lessons everywhere.</p>
+    </div>
+  </section>
+
+  <section class="wrap py-20 sm:py-28">
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-20">
+      <h2 class="display-md">Academy FAQs</h2>
+      <Faq faqs={faqs} />
+    </div>
+  </section>
+</BaseLayout>

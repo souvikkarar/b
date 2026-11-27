@@ -1,0 +1,90 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Img from '../../components/Img.astro';
+import { SITE } from '../../config/site.config';
+import { imageUrl } from '../../lib/images';
+import { articleSchema, breadcrumbSchema } from '../../lib/schema';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post, all: posts } }));
+}
+
+const { post, all } = Astro.props as { post: CollectionEntry<'blog'>; all: CollectionEntry<'blog'>[] };
+const { Content, headings } = await render(post);
+const d = post.data;
+const url = `${SITE.url}/blog/${post.id}/`;
+const toc = headings.filter((h) => h.depth === 2);
+const related = all
+  .filter((p) => p.id !== post.id)
+  .sort((a, b) => Number(b.data.category === d.category) - Number(a.data.category === d.category) || b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Blog', href: '/blog/' },
+  { name: d.title, href: `/blog/${post.id}/` },
+];
+const fmt = (x: Date) => x.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+const ogImage = imageUrl(d.image, 1200, 630);
+---
+
+<BaseLayout
+  title={d.seoTitle ?? `${d.title} | Muzicks Blog`}
+  description={d.description}
+  image={ogImage}
+  imageAlt={d.imageAlt}
+  type="article"
+  publishedTime={d.pubDate.toISOString()}
+  modifiedTime={(d.updatedDate ?? d.pubDate).toISOString()}
+  schema={[breadcrumbSchema(crumbs), articleSchema({ title: d.title, description: d.description, url, image: ogImage, author: d.author, published: d.pubDate, updated: d.updatedDate })]}
+>
+  <article>
+    <header class="wrap max-w-[56rem] pb-10 pt-8 sm:pt-10">
+      <Breadcrumbs items={crumbs} />
+      <p class="mt-10 text-stone">{d.category}</p>
+      <h1 class="display-lg mt-3">{d.title}</h1>
+      <p class="lead mt-5 text-stone">{d.description}</p>
+      <p class="mt-6 text-sm text-stone">
+        By {d.author} · <time datetime={d.pubDate.toISOString()}>{fmt(d.pubDate)}</time>
+        {d.updatedDate && <> · Updated <time datetime={d.updatedDate.toISOString()}>{fmt(d.updatedDate)}</time></>}
+      </p>
+    </header>
+
+    <div class="wrap max-w-[68rem]">
+      <div class="overflow-hidden rounded-[1.75rem]"><Img image={d.image} alt={d.imageAlt} ratio={16 / 9} eager widths={[700, 1100, 1600]} sizes="(min-width:1100px) 68rem, 100vw" class="w-full" /></div>
+    </div>
+
+    <div class="wrap grid max-w-[68rem] gap-12 py-14 lg:grid-cols-[14rem_1fr] lg:gap-16">
+      {toc.length > 0 && (
+        <nav aria-label="Table of contents" class="lg:sticky lg:top-28 lg:self-start">
+          <p class="font-semibold">In this article</p>
+          <ol class="mt-3 space-y-2 border-l border-line pl-4 text-[0.95rem] text-stone">
+            {toc.map((h) => <li><a href={`#${h.slug}`} class="hover:text-midnight">{h.text}</a></li>)}
+          </ol>
+        </nav>
+      )}
+      <div class="prose-muzicks max-w-[42rem]"><Content /></div>
+    </div>
+  </article>
+
+  {related.length > 0 && (
+    <section class="bg-sand py-16 sm:py-20">
+      <div class="wrap">
+        <h2 class="display-md">Keep reading</h2>
+        <ul class="mt-10 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+          {related.map((p) => (
+            <li>
+              <a href={`/blog/${p.id}/`} class="group block">
+                <div class="overflow-hidden rounded-2xl"><Img image={p.data.image} alt={p.data.imageAlt} ratio={3 / 2} widths={[400, 700]} sizes="(min-width:1024px) 30vw, 100vw" class="w-full" /></div>
+                <p class="mt-4 text-sm text-stone">{p.data.category}</p>
+                <h3 class="mt-1 text-2xl group-hover:underline underline-offset-4">{p.data.title}</h3>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+</BaseLayout>

@@ -1,0 +1,109 @@
+---
+import { ChevronDown, Menu, X } from 'lucide-react';
+import Logo from './Logo.astro';
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import { MAIN_NAV } from '../config/navigation';
+import { whatsappLink } from '../lib/whatsapp';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const wa = whatsappLink('general');
+---
+
+<header class="sticky top-0 z-50 border-b border-white/5 bg-midnight text-ivory">
+  <div class="wrap flex h-[4.5rem] items-center justify-between gap-6">
+    <a href="/" aria-label="Muzicks — home"><Logo /></a>
+
+    <nav aria-label="Main" class="hidden lg:block">
+      <ul class="flex items-center gap-1 text-[0.95rem]">
+        {MAIN_NAV.map((item) => (
+          <li class="group relative">
+            <a
+              href={item.href}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+              class:list={[
+                'inline-flex items-center gap-1 rounded-full px-3.5 py-2 transition-colors',
+                isActive(item.href) ? 'text-brass' : 'text-ivory/80 hover:text-ivory',
+              ]}
+            >
+              {item.label}
+              {item.children && <ChevronDown className="h-3.5 w-3.5 opacity-70" aria-hidden="true" />}
+            </a>
+            {item.children && (
+              <div class="invisible absolute left-0 top-full pt-2 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                <ul class="min-w-[15rem] rounded-2xl bg-midnight-2 p-2 shadow-2xl ring-1 ring-white/10">
+                  {item.children.map((c) => (
+                    <li>
+                      <a href={c.href} class="block rounded-xl px-4 py-2.5 text-ivory/85 hover:bg-white/5 hover:text-ivory">{c.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2">
+      {wa && (
+        <a href={wa} target="_blank" rel="noopener" class="hidden sm:inline-flex h-11 w-11 items-center justify-center rounded-full text-ivory/85 ring-1 ring-inset ring-ivory/20 hover:text-ivory hover:ring-ivory/50" aria-label="Chat with Muzicks on WhatsApp">
+          <WhatsAppIcon />
+        </a>
+      )}
+      <a href="/contact/" class="btn btn-brass hidden sm:inline-flex !min-h-11 !px-5 text-[0.95rem]">Enquire now</a>
+      <button
+        type="button"
+        id="nav-toggle"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full ring-1 ring-inset ring-ivory/20 lg:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+        aria-label="Open menu"
+      >
+        <Menu className="h-5 w-5" data-icon="open" aria-hidden="true" />
+        <X className="hidden h-5 w-5" data-icon="close" aria-hidden="true" />
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-nav" aria-label="Mobile" class="hidden lg:hidden border-t border-white/10 bg-midnight max-h-[calc(100dvh-4.5rem)] overflow-y-auto">
+    <ul class="wrap py-4">
+      {MAIN_NAV.map((item) => (
+        <li class="border-b border-white/10 last:border-0">
+          <a href={item.href} class:list={['block py-4 font-[family-name:var(--font-display)] text-3xl', isActive(item.href) ? 'text-brass' : 'text-ivory']}>{item.label}</a>
+          {item.children && (
+            <ul class="-mt-2 mb-4 grid grid-cols-2 gap-x-4 gap-y-1 text-ivory/75">
+              {item.children.slice(2).map((c) => (
+                <li><a href={c.href} class="block py-1.5">{c.label}</a></li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))}
+    </ul>
+    <div class="wrap flex flex-col gap-3 pb-8">
+      <a href="/contact/" class="btn btn-brass w-full">Enquire now</a>
+      {wa && (
+        <a href={wa} target="_blank" rel="noopener" class="btn btn-outline-light w-full"><WhatsAppIcon /> WhatsApp us</a>
+      )}
+    </div>
+  </nav>
+</header>
+
+<script>
+  const btn = document.getElementById('nav-toggle');
+  const panel = document.getElementById('mobile-nav');
+  if (btn && panel) {
+    const set = (open: boolean) => {
+      panel.classList.toggle('hidden', !open);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      btn.querySelector('[data-icon="open"]')?.classList.toggle('hidden', open);
+      btn.querySelector('[data-icon="close"]')?.classList.toggle('hidden', !open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    };
+    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
+    document.addEventListener('keydown', (e) => e.key === 'Escape' && set(false));
+    window.matchMedia('(min-width: 1024px)').addEventListener('change', (e) => e.matches && set(false));
+  }
+</script>

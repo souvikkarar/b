@@ -1,0 +1,20 @@
+---
+import { Plus } from 'lucide-react';
+
+export interface Props {
+  faqs: { q: string; a: string }[];
+  dark?: boolean;
+}
+const { faqs, dark = false } = Astro.props;
+---
+<div class={`border-t ${dark ? 'border-white/15' : 'border-line'}`}>
+  {faqs.map((f, i) => (
+    <details class={`group border-b ${dark ? 'border-white/15' : 'border-line'}`} open={i === 0}>
+      <summary class="flex cursor-pointer list-none items-start justify-between gap-6 py-6 [&::-webkit-details-marker]:hidden">
+        <h3 class="font-sans text-lg font-semibold leading-snug sm:text-xl">{f.q}</h3>
+        <Plus className={`mt-1 h-5 w-5 shrink-0 transition-transform group-open:rotate-45 ${dark ? 'text-brass' : 'text-brass-deep'}`} aria-hidden="true" />
+      </summary>
+      <p class={`-mt-1 pb-7 pr-10 ${dark ? 'text-mist' : 'text-stone'}`}>{f.a}</p>
+    </details>
+  ))}
+</div>

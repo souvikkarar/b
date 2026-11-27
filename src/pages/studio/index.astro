@@ -1,0 +1,148 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Img from '../../components/Img.astro';
+import Faq from '../../components/Faq.astro';
+import Enquiry from '../../components/Enquiry.astro';
+import { FACILITIES, STUDIO_SERVICES, BOOKING_STEPS, STUDIO_FAQS } from '../../data/studio';
+import { whatsappLink } from '../../lib/whatsapp';
+import { breadcrumbSchema, faqSchema } from '../../lib/schema';
+
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Studio', href: '/studio/' }];
+const wa = whatsappLink('studio');
+const anyConfirmed = FACILITIES.some((f) => f.confirmed);
+---
+
+<BaseLayout
+  title="Jamming Studio & Rehearsal Space in Kolkata | Muzicks Studio"
+  description="Muzicks creative spaces in Kolkata for musicians, singers and bands — jamming, rehearsal and practice. Explore the facilities and send a studio booking enquiry."
+  schema={[breadcrumbSchema(crumbs), faqSchema(STUDIO_FAQS)]}
+  whatsappKind="studio"
+>
+  <!-- Hero -->
+  <section class="bg-teal-deep text-ivory">
+    <div class="wrap grid items-end gap-10 pb-16 pt-8 sm:pt-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:pb-20">
+      <div>
+        <Breadcrumbs items={crumbs} light />
+        <p class="kicker mt-10 text-[#8fd3c9]">Create</p>
+        <h1 class="display-lg mt-3">Muzicks Creative Spaces</h1>
+        <p class="lead mt-6 max-w-xl text-ivory/85">
+          Rooms to practise, rehearse and jam — for independent musicians, singers, bands and anyone who wants a place to make music with others.
+        </p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href="#enquire" class="btn bg-ivory text-teal-deep hover:bg-white">Explore studio booking</a>
+          {wa && <a href={wa} target="_blank" rel="noopener" class="btn btn-outline-light">Ask on WhatsApp</a>}
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div class="overflow-hidden rounded-[1.5rem] row-span-2"><Img image="rehearsal" ratio={3 / 4} eager widths={[400, 700]} sizes="(min-width:1024px) 22vw, 50vw" class="h-full w-full" /></div>
+        <div class="overflow-hidden rounded-[1.5rem]"><Img image="mixer" ratio={1} widths={[300, 500]} sizes="(min-width:1024px) 22vw, 50vw" class="h-full w-full" /></div>
+        <div class="overflow-hidden rounded-[1.5rem]"><Img image="drums" ratio={1} widths={[300, 500]} sizes="(min-width:1024px) 22vw, 50vw" class="h-full w-full" /></div>
+      </div>
+    </div>
+  </section>
+
+  {!anyConfirmed && (
+    <div class="bg-[#e3f1ee] text-teal-deep">
+      <p class="wrap py-4 text-[0.95rem]">Our studio spaces are being set up. Facility details below will be updated as they are confirmed — enquire now to be among the first to book.</p>
+    </div>
+  )}
+
+  <!-- Intro -->
+  <section class="wrap py-20 sm:py-28">
+    <div class="grid gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-20">
+      <p class="font-[family-name:var(--font-display)] text-[clamp(1.9rem,3.2vw,2.9rem)] leading-[1.15]">
+        Music grows when people play together. Muzicks Creative Spaces are designed for that — somewhere to rehearse a set, try out an idea or simply jam.
+      </p>
+      <p class="text-stone lg:pt-3">Each space has its own purpose, so you can choose the room that fits your session.</p>
+    </div>
+  </section>
+
+  <!-- Facilities -->
+  <section class="bg-sand py-20 sm:py-28" aria-labelledby="facilities-title">
+    <div class="wrap">
+      <h2 id="facilities-title" class="display-md">Facilities</h2>
+      <ul class="mt-12 space-y-16">
+        {FACILITIES.map((f, i) => (
+          <li id={f.slug} class="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+            <div class:list={['overflow-hidden rounded-[1.5rem]', i % 2 === 1 && 'lg:order-2']}>
+              <Img image={f.image} ratio={4 / 3} widths={[480, 800, 1100]} class="w-full" />
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-3">
+                <h3 class="text-4xl">{f.name}</h3>
+                {!f.confirmed && <span class="rounded-full bg-teal/15 px-3 py-1 text-sm text-teal-deep">Details coming soon</span>}
+              </div>
+              <p class="mt-3 text-stone">{f.description}</p>
+              <dl class="mt-6 grid gap-4 sm:grid-cols-2">
+                <div><dt class="text-sm font-semibold">Suitable for</dt><dd class="text-stone">{f.suitableFor.join(', ')}</dd></div>
+                <div><dt class="text-sm font-semibold">Capacity</dt><dd class="text-stone">{f.capacity || 'To be confirmed'}</dd></div>
+                <div><dt class="text-sm font-semibold">Equipment</dt><dd class="text-stone">{f.equipment.length ? f.equipment.join(', ') : 'To be confirmed'}</dd></div>
+                <div><dt class="text-sm font-semibold">Location</dt><dd class="text-stone">{f.location || 'To be confirmed'}</dd></div>
+              </dl>
+              <a href={`/studio/?facility=${encodeURIComponent(f.name)}#enquire`} class="btn btn-teal mt-7">Enquire about the {f.name.toLowerCase()}</a>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Collaborative jamming + services -->
+  <section class="wrap py-20 sm:py-28">
+    <div class="grid gap-16 lg:grid-cols-2 lg:gap-20">
+      <div>
+        <h2 class="display-md">Collaborative jamming</h2>
+        <p class="lead mt-5 text-stone">Meet other musicians, try songs you would never play alone and discover your sound in a group.</p>
+        <p class="mt-4 text-stone">Jam sessions and group formats will be announced here. Enquire to tell us what you are looking for.</p>
+      </div>
+      <div>
+        <h2 class="display-md">Services</h2>
+        <ul class="mt-8 border-t border-line">
+          {STUDIO_SERVICES.map((s) => (
+            <li class="flex items-start justify-between gap-6 border-b border-line py-4">
+              <div><h3 class="font-sans text-lg font-semibold">{s.name}</h3><p class="text-stone">{s.text}</p></div>
+              <span class={`mt-1 shrink-0 rounded-full px-3 py-1 text-xs ${s.offered ? 'bg-teal text-white' : 'bg-sand text-stone'}`}>{s.offered ? 'Available' : 'Coming soon'}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- How booking works -->
+  <section class="bg-teal-deep py-20 text-ivory sm:py-28">
+    <div class="wrap">
+      <h2 class="display-md">How booking works</h2>
+      <ol class="mt-12 grid gap-10 md:grid-cols-3">
+        {BOOKING_STEPS.map((s, i) => (
+          <li class="border-t border-white/20 pt-6">
+            <span class="font-[family-name:var(--font-display)] text-5xl text-[#8fd3c9]">{i + 1}</span>
+            <h3 class="mt-3 text-3xl">{s.title}</h3>
+            <p class="mt-2 text-ivory/75">{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Enquiry -->
+  <section id="enquire" class="scroll-mt-20 wrap py-20 sm:py-28">
+    <div class="grid gap-12 lg:grid-cols-[1fr_1.5fr] lg:gap-16">
+      <div>
+        <p class="kicker text-teal-deep">Studio enquiry</p>
+        <h2 class="display-md mt-2">Request a session</h2>
+        <p class="mt-5 text-stone">This is an enquiry, not an instant booking. We will check availability and confirm with you directly.</p>
+        {wa && <a href={wa} target="_blank" rel="noopener" class="btn btn-outline-dark mt-8">Ask on WhatsApp</a>}
+      </div>
+      <Enquiry kind="studio" submitLabel="Send studio enquiry" buttonClass="btn-teal" />
+    </div>
+  </section>
+
+  <section class="bg-sand py-20 sm:py-28">
+    <div class="wrap grid gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-20">
+      <h2 class="display-md">Studio FAQs</h2>
+      <Faq faqs={STUDIO_FAQS} />
+    </div>
+  </section>
+</BaseLayout>

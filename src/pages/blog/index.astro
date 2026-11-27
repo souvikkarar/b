@@ -1,0 +1,52 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Img from '../../components/Img.astro';
+import { breadcrumbSchema } from '../../lib/schema';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Blog', href: '/blog/' }];
+const fmt = (d: Date) => d.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+const [lead, ...rest] = posts;
+---
+
+<BaseLayout
+  title="Music Learning Blog — Guitar, Vocals, Theory & More | Muzicks"
+  description="Practical guides from Muzicks on learning music: choosing instruments, vocal training, Hindustani classical, Bollywood singing, music theory and more."
+  schema={[breadcrumbSchema(crumbs)]}
+>
+  <section class="bg-midnight text-ivory">
+    <div class="wrap pb-14 pt-8 sm:pt-10">
+      <Breadcrumbs items={crumbs} light />
+      <h1 class="display-lg mt-10">The Muzicks journal</h1>
+      <p class="lead mt-6 max-w-2xl text-ivory/80">Guides and ideas for learning, performing and enjoying music.</p>
+    </div>
+  </section>
+
+  <section class="wrap py-16 sm:py-24">
+    {lead && (
+      <a href={`/blog/${lead.id}/`} class="group grid items-center gap-8 lg:grid-cols-[1.3fr_1fr] lg:gap-14">
+        <div class="overflow-hidden rounded-[1.75rem]"><Img image={lead.data.image} alt={lead.data.imageAlt} ratio={16 / 10} eager widths={[600, 1000, 1400]} class="w-full transition-transform duration-700 group-hover:scale-[1.03]" /></div>
+        <div>
+          <p class="text-sm text-stone">{lead.data.category} · <time datetime={lead.data.pubDate.toISOString()}>{fmt(lead.data.pubDate)}</time></p>
+          <h2 class="display-md mt-3 group-hover:underline decoration-1 underline-offset-8">{lead.data.title}</h2>
+          <p class="mt-4 text-stone">{lead.data.description}</p>
+        </div>
+      </a>
+    )}
+    {rest.length > 0 && (
+      <ul class="mt-20 grid gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+        {rest.map((p) => (
+          <li>
+            <a href={`/blog/${p.id}/`} class="group block">
+              <div class="overflow-hidden rounded-2xl"><Img image={p.data.image} alt={p.data.imageAlt} ratio={3 / 2} widths={[400, 700]} sizes="(min-width:1024px) 30vw, (min-width:640px) 45vw, 100vw" class="w-full transition-transform duration-700 group-hover:scale-[1.04]" /></div>
+              <p class="mt-4 text-sm text-stone">{p.data.category} · <time datetime={p.data.pubDate.toISOString()}>{fmt(p.data.pubDate)}</time></p>
+              <h2 class="mt-2 text-3xl group-hover:underline decoration-1 underline-offset-4">{p.data.title}</h2>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+</BaseLayout>

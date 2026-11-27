@@ -1,0 +1,81 @@
+---
+import Logo from './Logo.astro';
+import { CONTACT, SOCIAL, SITE } from '../config/site.config';
+import { FOOTER_NAV } from '../config/navigation';
+import { whatsappLink } from '../lib/whatsapp';
+
+const pathways = [
+  { title: 'Learn music', text: 'Course and class enquiries', href: '/contact/?type=course', accent: 'bg-brass', wa: whatsappLink('course') },
+  { title: 'Book a performance', text: 'Concerts, events and brands', href: '/concerts/#book', accent: 'bg-ember', wa: whatsappLink('concert') },
+  { title: 'Use the studio', text: 'Jamming and rehearsal enquiries', href: '/studio/#enquire', accent: 'bg-teal', wa: whatsappLink('studio') },
+];
+const a = CONTACT.address;
+const socials = [
+  { label: 'Instagram', href: SOCIAL.instagram },
+  { label: 'YouTube', href: SOCIAL.youtube },
+  { label: 'Facebook', href: SOCIAL.facebook },
+  { label: 'X', href: SOCIAL.x },
+].filter((s) => s.href);
+---
+
+<footer class="bg-midnight text-ivory">
+  <section aria-labelledby="pathways-title" class="border-b border-white/10">
+    <div class="wrap py-16 sm:py-20">
+      <h2 id="pathways-title" class="display-md max-w-xl">How can we help you make music?</h2>
+      <ul class="mt-10 grid gap-px overflow-hidden rounded-3xl bg-white/10 md:grid-cols-3">
+        {pathways.map((p) => (
+          <li class="bg-midnight p-7 sm:p-8">
+            <span class={`block h-1 w-10 rounded-full ${p.accent}`} aria-hidden="true"></span>
+            <h3 class="mt-5 text-3xl">{p.title}</h3>
+            <p class="mt-1 text-mist">{p.text}</p>
+            <div class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-[0.95rem]">
+              <a href={p.href} class="link-underline decoration-ivory/30 hover:decoration-ivory">Send an enquiry</a>
+              {p.wa && <a href={p.wa} target="_blank" rel="noopener" class="link-underline decoration-ivory/30 hover:decoration-ivory">WhatsApp</a>}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <div class="wrap grid gap-12 py-14 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+    <div>
+      <Logo />
+      <p class="mt-5 max-w-xs text-mist">{SITE.tagline}</p>
+      {socials.length > 0 && (
+        <ul class="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-[0.95rem]">
+          {socials.map((s) => <li><a href={s.href} target="_blank" rel="noopener" class="text-ivory/80 hover:text-ivory">{s.label}</a></li>)}
+        </ul>
+      )}
+    </div>
+
+    {Object.entries(FOOTER_NAV).map(([group, links]) => (
+      <nav aria-label={`${group} links`}>
+        <h2 class="font-sans text-sm font-semibold text-ivory/60">{group}</h2>
+        <ul class="mt-4 space-y-2.5">
+          {links.map((l) => <li><a href={l.href} class="text-ivory/85 hover:text-ivory">{l.label}</a></li>)}
+        </ul>
+      </nav>
+    ))}
+
+    <div>
+      <h2 class="font-sans text-sm font-semibold text-ivory/60">Visit or call</h2>
+      <address class="mt-4 not-italic leading-relaxed text-ivory/85">
+        {a.street}<br />{a.locality}, {a.city} {a.postalCode}<br />{a.region}, India
+      </address>
+      <ul class="mt-4 space-y-1.5">
+        {CONTACT.phone && <li><a href={`tel:${CONTACT.phone}`} class="text-ivory/85 hover:text-ivory">{CONTACT.phoneDisplay}</a></li>}
+        {CONTACT.email && <li><a href={`mailto:${CONTACT.email}`} class="text-ivory/85 hover:text-ivory">{CONTACT.email}</a></li>}
+      </ul>
+      {CONTACT.hours.length > 0 && (
+        <ul class="mt-4 text-sm text-mist">
+          {CONTACT.hours.map((h) => <li>{h.days}: {h.hours}</li>)}
+        </ul>
+      )}
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <p class="wrap py-6 text-sm text-mist">© {new Date().getFullYear()} {SITE.name}. Music academy in Kolkata.</p>
+  </div>
+</footer>

@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Muzicks design system
+   Base: midnight + ivory. One accent per vertical:
+   Academy = brass, Concerts = ember, Studio = teal.
+   Display: Cormorant Garamond · Text: Hanken Grotesk
+   ============================================================ */
+@theme {
+  --color-midnight: #151a23;
+  --color-midnight-2: #1f2632;
+  --color-ivory: #f6f1e7;
+  --color-sand: #ece4d4;
+  --color-line: #d9cfbd;
+  --color-stone: #625f59;      /* muted text on ivory (AA) */
+  --color-mist: #a9adb7;       /* muted text on midnight (AA) */
+  --color-brass: #c8a04a;      /* Academy */
+  --color-brass-deep: #7d5f1c; /* brass text on ivory (AA) */
+  --color-ember: #d9642e;      /* Concerts */
+  --color-teal: #2f8f83;       /* Studio */
+  --color-teal-deep: #1d5f57;
+
+  --font-display: 'Cormorant Garamond', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+
+  --breakpoint-xs: 26rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-ivory text-midnight font-sans antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  p, li { text-wrap: pretty; }
+  ::selection { background: var(--color-brass); color: var(--color-midnight); }
+  :focus-visible {
+    outline: 3px solid var(--color-brass);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+  img { max-width: 100%; height: auto; }
+}
+
+@layer components {
+  .wrap { @apply mx-auto w-full max-w-[78rem] px-5 sm:px-8; }
+
+  .display-xl { font-size: clamp(3rem, 8.2vw, 7.25rem); line-height: 0.95; letter-spacing: -0.025em; }
+  .display-lg { font-size: clamp(2.5rem, 5.6vw, 4.75rem); line-height: 1; letter-spacing: -0.02em; }
+  .display-md { font-size: clamp(2rem, 3.8vw, 3.25rem); line-height: 1.04; }
+  .lead { font-size: clamp(1.125rem, 1.6vw, 1.3rem); line-height: 1.6; }
+
+  /* Serif italic kicker used above some headings — sentence case, no tracking */
+  .kicker { font-family: var(--font-display); font-style: italic; font-size: 1.35rem; line-height: 1.2; }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 font-semibold transition-colors;
+    min-height: 3.25rem;
+    font-size: 1rem;
+  }
+  .btn-brass { @apply bg-brass text-midnight hover:bg-[#d8b25e]; }
+  .btn-ember { @apply bg-ember text-white hover:bg-[#c4551f]; }
+  .btn-teal { @apply bg-teal text-white hover:bg-teal-deep; }
+  .btn-dark { @apply bg-midnight text-ivory hover:bg-midnight-2; }
+  .btn-outline-light { @apply ring-1 ring-inset ring-ivory/40 text-ivory hover:ring-ivory hover:bg-ivory/5; }
+  .btn-outline-dark { @apply ring-1 ring-inset ring-midnight/30 text-midnight hover:ring-midnight; }
+
+  .link-underline {
+    @apply underline decoration-1 underline-offset-[6px] transition-colors;
+  }
+
+  .prose-muzicks { @apply text-[1.075rem] leading-[1.75]; }
+  .prose-muzicks h2 { @apply mt-14 mb-4 text-4xl; scroll-margin-top: 6rem; }
+  .prose-muzicks h3 { @apply mt-10 mb-3 text-2xl; scroll-margin-top: 6rem; }
+  .prose-muzicks p { @apply my-5; }
+  .prose-muzicks ul { @apply my-5 list-disc pl-6 space-y-2; }
+  .prose-muzicks ol { @apply my-5 list-decimal pl-6 space-y-2; }
+  .prose-muzicks a { @apply text-brass-deep underline underline-offset-4; }
+  .prose-muzicks blockquote { @apply my-8 border-l-2 border-brass pl-6 font-[family-name:var(--font-display)] text-2xl italic; }
+  .prose-muzicks strong { @apply font-semibold; }
+}
+
+/* Subtle reveal — applied sparingly via [data-reveal]; disabled for reduced motion and no-JS. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 700ms cubic-bezier(.2,.7,.2,1), transform 700ms cubic-bezier(.2,.7,.2,1);
+}
+.js [data-reveal].is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+}

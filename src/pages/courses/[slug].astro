@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import CourseCard from '../../components/CourseCard.astro';
+import Faq from '../../components/Faq.astro';
+import Enquiry from '../../components/Enquiry.astro';
+import { COURSES, getCourse, type Course } from '../../data/courses';
+import { CONTACT, OFFERS_DEMO_CLASS, SITE } from '../../config/site.config';
+import { whatsappLink } from '../../lib/whatsapp';
+import { resolveImage, imageUrl } from '../../lib/images';
+import { breadcrumbSchema, courseSchema, faqSchema } from '../../lib/schema';
+
+export function getStaticPaths() {
+  return COURSES.map((course) => ({ params: { slug: course.slug }, props: { course } }));
+}
+
+const { course } = Astro.props as { course: Course };
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Courses', href: '/courses/' },
+  { name: course.name, href: `/courses/${course.slug}/` },
+];
+const related = course.related.map(getCourse).filter(Boolean) as Course[];
+const wa = whatsappLink('course', course.name);
+const img = resolveImage(course.image);
+const modeText = [course.modes.offline && `in person in ${CONTACT.address.city}`, course.modes.online && 'online'].filter(Boolean).join(' and ');
+---
+
+<BaseLayout
+  title={course.seo.title}
+  description={course.seo.description}
+  image={imageUrl(img.src, 1200, 630)}
+  imageAlt={img.alt}
+  schema={[
+    breadcrumbSchema(crumbs),
+    courseSchema({ name: `${course.name} classes`, description: course.seo.description, url: `${SITE.url}/courses/${course.slug}/`, modes: course.modes }),
+    faqSchema(course.faqs),
+  ]}
+  whatsappKind="course"
+  whatsappTopic={course.name}
+>
+  <PageHero
+    title={course.h1}
+    kicker={course.category === 'vocal' ? 'Vocal training' : 'Instrumental training'}
+    lead={course.tagline}
+    image={course.image}
+    breadcrumbs={crumbs}
+  >
+    <Fragment slot="actions">
+      <a href="#enquire" class="btn btn-brass">Enquire about this course</a>
+      {wa && <a href={wa} target="_blank" rel="noopener" class="btn btn-outline-light">Ask on WhatsApp</a>}
+    </Fragment>
+  </PageHero>
+
+  <!-- Intro + what you will learn -->
+  <section class="wrap py-20 sm:py-28">
+    <div class="grid gap-14 lg:grid-cols-[1.3fr_1fr] lg:gap-20">
+      <div class="space-y-5">
+        <h2 class="display-md">About the {course.name.toLowerCase()} course</h2>
+        {course.intro.map((p, i) => <p class={i === 0 ? 'lead text-midnight' : 'text-stone'}>{p}</p>)}
+      </div>
+      <div class="rounded-[1.5rem] bg-sand p-8">
+        <h2 class="text-3xl">What you will learn</h2>
+        <ul class="mt-5 space-y-3">
+          {course.learn.map((l) => (
+            <li class="flex gap-3"><span class="mt-[0.75rem] h-px w-5 shrink-0 bg-brass-deep" aria-hidden="true"></span>{l}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Levels -->
+  <section class="bg-midnight py-20 text-ivory sm:py-28">
+    <div class="wrap">
+      <h2 class="display-md max-w-2xl">Learning levels</h2>
+      <p class="mt-4 max-w-xl text-mist">Your teacher places you at the right level and moves you on when you are ready.</p>
+      <ol class="mt-12 grid gap-10 md:grid-cols-3">
+        {course.levels.map((l, i) => (
+          <li class="border-t border-white/15 pt-6">
+            <span class="font-[family-name:var(--font-display)] text-5xl text-brass">{i + 1}</span>
+            <h3 class="mt-3 text-3xl">{l.name}</h3>
+            <p class="mt-2 text-mist">{l.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Who it's for + method -->
+  <section class="wrap py-20 sm:py-28">
+    <div class="grid gap-16 lg:grid-cols-2 lg:gap-20">
+      <div>
+        <h2 class="display-md">Who this course suits</h2>
+        <dl class="mt-8 grid gap-x-8 gap-y-7 sm:grid-cols-2">
+          {course.forWhom.map((w) => (
+            <div><dt class="text-2xl font-[family-name:var(--font-display)] font-semibold">{w.title}</dt><dd class="mt-1 text-stone">{w.text}</dd></div>
+          ))}
+        </dl>
+      </div>
+      <div>
+        <h2 class="display-md">How we teach</h2>
+        <ul class="mt-8 space-y-7">
+          {course.method.map((m) => (
+            <li class="border-t border-line pt-5"><h3 class="text-2xl">{m.title}</h3><p class="mt-1 text-stone">{m.text}</p></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Availability -->
+  <section class="bg-sand py-16 sm:py-20">
+    <div class="wrap grid items-center gap-8 md:grid-cols-[1.2fr_1fr]">
+      <div>
+        <h2 class="display-md">Online and offline {course.name.toLowerCase()} classes</h2>
+        <p class="mt-4 max-w-xl text-stone">
+          {course.name} lessons are available {modeText}. Share your preferred mode in your enquiry and we will confirm timings and next steps.
+        </p>
+      </div>
+      <ul class="grid gap-3 sm:grid-cols-2">
+        <li class={`rounded-2xl p-6 ${course.modes.offline ? 'bg-ivory' : 'bg-ivory/50 text-stone'}`}>
+          <p class="text-2xl font-[family-name:var(--font-display)] font-semibold">In person</p>
+          <p class="mt-1 text-sm">{course.modes.offline ? `${CONTACT.address.locality}, ${CONTACT.address.city}` : 'Not currently offered'}</p>
+        </li>
+        <li class={`rounded-2xl p-6 ${course.modes.online ? 'bg-ivory' : 'bg-ivory/50 text-stone'}`}>
+          <p class="text-2xl font-[family-name:var(--font-display)] font-semibold">Online</p>
+          <p class="mt-1 text-sm">{course.modes.online ? 'Live lessons, wherever you are' : 'Not currently offered'}</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  <section class="wrap py-20 sm:py-28">
+    <div class="grid gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-20">
+      <h2 class="display-md">{course.name} FAQs</h2>
+      <Faq faqs={course.faqs} />
+    </div>
+  </section>
+
+  <!-- Enquiry -->
+  <section id="enquire" class="scroll-mt-20 bg-midnight py-20 text-ivory sm:py-28">
+    <div class="wrap grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
+      <div>
+        <p class="kicker text-brass">Start learning</p>
+        <h2 class="display-md mt-2">Enquire about {course.name.toLowerCase()} lessons</h2>
+        <p class="mt-5 text-mist">
+          Parents can enquire on behalf of a child. We will reply with options, timings{OFFERS_DEMO_CLASS ? ' and how to book a demo class' : ''}.
+        </p>
+        {wa && <a href={wa} target="_blank" rel="noopener" class="btn btn-outline-light mt-8">Prefer WhatsApp? Message us</a>}
+      </div>
+      <div class="text-midnight">
+        <Enquiry kind="course" defaultCourse={course.name} buttonClass="btn-brass" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Related -->
+  <section class="wrap py-20 sm:py-24">
+    <h2 class="display-md">You might also like</h2>
+    <ul class="mt-10 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+      {related.map((c) => <li><CourseCard course={c} /></li>)}
+    </ul>
+  </section>
+</BaseLayout>

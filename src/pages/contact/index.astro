@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Enquiry from '../../components/Enquiry.astro';
+import WhatsAppIcon from '../../components/WhatsAppIcon.astro';
+import { CONTACT, SOCIAL } from '../../config/site.config';
+import { whatsappLink } from '../../lib/whatsapp';
+import { breadcrumbSchema } from '../../lib/schema';
+
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Contact', href: '/contact/' }];
+const a = CONTACT.address;
+const tabs = [
+  { key: 'course', label: 'Courses', accent: 'btn-brass' },
+  { key: 'concert', label: 'Concert booking', accent: 'btn-ember' },
+  { key: 'studio', label: 'Studio', accent: 'btn-teal' },
+  { key: 'general', label: 'General', accent: 'btn-dark' },
+] as const;
+const waLinks = [
+  { label: 'General enquiry', href: whatsappLink('general') },
+  { label: 'Course enquiry', href: whatsappLink('course') },
+  { label: 'Concert booking', href: whatsappLink('concert') },
+  { label: 'Studio enquiry', href: whatsappLink('studio') },
+].filter((l) => l.href);
+---
+
+<BaseLayout
+  title="Contact Muzicks | Music Classes, Events & Studio, Kolkata"
+  description="Contact Muzicks in Kolkata for music course enquiries, concert and event bookings, or studio sessions. Call, WhatsApp or send an enquiry form."
+  schema={[breadcrumbSchema(crumbs)]}
+>
+  <section class="bg-midnight text-ivory">
+    <div class="wrap pb-14 pt-8 sm:pt-10">
+      <Breadcrumbs items={crumbs} light />
+      <h1 class="display-lg mt-10 max-w-3xl">Let’s talk music</h1>
+      <p class="lead mt-6 max-w-2xl text-ivory/80">Choose what you would like to talk about. We reply to every enquiry personally.</p>
+    </div>
+  </section>
+
+  <section class="wrap py-16 sm:py-20">
+    <div class="grid gap-14 lg:grid-cols-[1.5fr_1fr] lg:gap-16">
+      <div>
+        <div role="tablist" aria-label="Type of enquiry" class="flex flex-wrap gap-2" id="contact-tabs">
+          {tabs.map((t, i) => (
+            <button type="button" role="tab" id={`tab-${t.key}`} aria-controls={`panel-${t.key}`} aria-selected={i === 0 ? 'true' : 'false'} data-tab={t.key}
+              class="rounded-full px-5 py-2.5 font-semibold ring-1 ring-inset ring-line transition-colors aria-selected:bg-midnight aria-selected:text-ivory aria-selected:ring-midnight">
+              {t.label}
+            </button>
+          ))}
+        </div>
+        {tabs.map((t, i) => (
+          <div role="tabpanel" id={`panel-${t.key}`} aria-labelledby={`tab-${t.key}`} class="mt-8" hidden={i !== 0}>
+            <Enquiry kind={t.key} buttonClass={t.accent} />
+          </div>
+        ))}
+      </div>
+
+      <aside class="space-y-10">
+        <div>
+          <h2 class="text-3xl">WhatsApp</h2>
+          <ul class="mt-4 space-y-2">
+            {waLinks.map((l) => (
+              <li><a href={l.href} target="_blank" rel="noopener" class="inline-flex items-center gap-2 font-semibold hover:underline underline-offset-4"><WhatsAppIcon class="h-5 w-5 text-[#1f8f55]" />{l.label}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2 class="text-3xl">Call or email</h2>
+          <ul class="mt-4 space-y-1.5">
+            {CONTACT.phone && <li><a href={`tel:${CONTACT.phone}`} class="hover:underline underline-offset-4">{CONTACT.phoneDisplay}</a></li>}
+            {CONTACT.email && <li><a href={`mailto:${CONTACT.email}`} class="hover:underline underline-offset-4">{CONTACT.email}</a></li>}
+          </ul>
+        </div>
+        <div>
+          <h2 class="text-3xl">Visit</h2>
+          <address class="mt-4 not-italic text-stone">{a.street}<br />{a.locality}, {a.city} {a.postalCode}<br />{a.region}, India</address>
+          {CONTACT.hours.length > 0 && <ul class="mt-3 text-stone">{CONTACT.hours.map((h) => <li>{h.days}: {h.hours}</li>)}</ul>}
+          {CONTACT.googleBusinessUrl && <a href={CONTACT.googleBusinessUrl} target="_blank" rel="noopener" class="link-underline mt-3 inline-block decoration-brass">View on Google</a>}
+        </div>
+        <div>
+          <h2 class="text-3xl">Follow</h2>
+          <ul class="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+            {Object.entries(SOCIAL).filter(([, v]) => v).map(([k, v]) => <li><a href={v} target="_blank" rel="noopener" class="capitalize hover:underline underline-offset-4">{k === 'x' ? 'X' : k}</a></li>)}
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  {CONTACT.mapEmbedUrl && (
+    <section class="wrap pb-20">
+      <iframe title="Muzicks on Google Maps" src={CONTACT.mapEmbedUrl} loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="h-[420px] w-full rounded-[1.75rem] border-0"></iframe>
+    </section>
+  )}
+</BaseLayout>
+
+<script>
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('#contact-tabs [role="tab"]'));
+  const select = (key: string) => {
+    tabs.forEach((t) => {
+      const on = t.dataset.tab === key;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      const panel = document.getElementById(`panel-${t.dataset.tab}`);
+      if (panel) panel.hidden = !on;
+    });
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => select(t.dataset.tab!));
+    t.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      next.focus();
+      select(next.dataset.tab!);
+    });
+  });
+  const type = new URLSearchParams(location.search).get('type');
+  if (type && tabs.some((t) => t.dataset.tab === type)) select(type);
+</script>

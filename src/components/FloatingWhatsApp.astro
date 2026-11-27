@@ -1,0 +1,19 @@
+---
+import WhatsAppIcon from './WhatsAppIcon.astro';
+import { whatsappLink, type EnquiryKind } from '../lib/whatsapp';
+
+export interface Props { kind?: EnquiryKind; topic?: string }
+const { kind = 'general', topic } = Astro.props;
+const href = whatsappLink(kind, topic);
+---
+{href && (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener"
+    class="fixed bottom-5 right-5 z-40 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#1f8f55] text-white shadow-[0_10px_30px_-8px_rgba(0,0,0,.5)] hover:bg-[#187446] sm:bottom-7 sm:right-7"
+    aria-label="Message Muzicks on WhatsApp"
+  >
+    <WhatsAppIcon class="h-7 w-7" />
+  </a>
+)}

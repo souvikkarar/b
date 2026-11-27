@@ -1,0 +1,45 @@
+---
+import CourseCard from './CourseCard.astro';
+import { COURSES } from '../data/courses';
+
+export interface Props { id?: string }
+const { id = 'course-grid' } = Astro.props;
+const tabs = [
+  { key: 'all', label: `All courses (${COURSES.length})` },
+  { key: 'instrumental', label: 'Instrumental' },
+  { key: 'vocal', label: 'Vocal' },
+];
+---
+<div data-course-filter={id}>
+  <div role="group" aria-label="Filter courses" class="flex flex-wrap gap-2">
+    {tabs.map((t, i) => (
+      <button
+        type="button"
+        data-filter={t.key}
+        aria-pressed={i === 0 ? 'true' : 'false'}
+        class="rounded-full px-5 py-2.5 text-[0.95rem] font-semibold ring-1 ring-inset ring-line transition-colors aria-pressed:bg-midnight aria-pressed:text-ivory aria-pressed:ring-midnight hover:ring-midnight/40"
+      >
+        {t.label}
+      </button>
+    ))}
+  </div>
+  <ul class="mt-10 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3" aria-live="polite">
+    {COURSES.map((c) => (
+      <li data-category={c.category}><CourseCard course={c} /></li>
+    ))}
+  </ul>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-course-filter]').forEach((root) => {
+    const buttons = root.querySelectorAll<HTMLButtonElement>('[data-filter]');
+    const items = root.querySelectorAll<HTMLElement>('li[data-category]');
+    buttons.forEach((btn) =>
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.filter;
+        buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+        items.forEach((li) => (li.hidden = key !== 'all' && li.dataset.category !== key));
+      }),
+    );
+  });
+</script>

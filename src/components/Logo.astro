@@ -1,0 +1,11 @@
+---
+export interface Props { light?: boolean; class?: string }
+const { light = true, class: cls = '' } = Astro.props;
+---
+<span class={`inline-flex items-baseline gap-1.5 ${cls}`}>
+  <svg viewBox="0 0 32 32" class="h-7 w-7 self-center" aria-hidden="true">
+    <circle cx="16" cy="16" r="15" fill="none" stroke="#C8A04A" stroke-width="1.5" />
+    <path d="M9 21V11l7 6 7-6v10" fill="none" stroke={light ? '#F6F1E7' : '#151A23'} stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+  </svg>
+  <span class={`font-[family-name:var(--font-display)] text-[1.9rem] font-semibold leading-none tracking-[-0.02em] ${light ? 'text-ivory' : 'text-midnight'}`}>Muzicks</span>
+</span>
