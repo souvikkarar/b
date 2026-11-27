@@ -1,106 +1,197 @@
 ---
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown, Menu, X, Phone } from 'lucide-react';
 import Logo from './Logo.astro';
 import WhatsAppIcon from './WhatsAppIcon.astro';
-import { MAIN_NAV } from '../config/navigation';
+import { INSTRUMENTAL, VOCAL } from '../data/courses';
+import { CONTACT, OFFERS_DEMO_CLASS } from '../config/site.config';
 import { whatsappLink } from '../lib/whatsapp';
 
 const path = Astro.url.pathname;
-const isActive = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const isActive = (href: string) => path.startsWith(href);
+const academyActive = isActive('/academy/') || isActive('/courses/');
 const wa = whatsappLink('general');
+
+/** The three business verticals lead the navigation, each with its own accent. */
+const verticals = [
+  { label: 'Concerts', href: '/concerts/', accent: 'bg-ember', text: 'text-ember' },
+  { label: 'Studio', href: '/studio/', accent: 'bg-teal', text: 'text-teal-deep' },
+];
+const secondary = [
+  { label: 'About', href: '/about/' },
+  { label: 'Blog', href: '/blog/' },
+  { label: 'Contact', href: '/contact/' },
+];
 ---
 
-<header class="sticky top-0 z-50 border-b border-white/5 bg-midnight text-ivory">
-  <div class="wrap flex h-[4.5rem] items-center justify-between gap-6">
-    <a href="/" aria-label="Muzicks — home"><Logo /></a>
+<!-- Utility strip (scrolls away) -->
+<div class="bg-midnight text-ivory/75">
+  <div class="wrap flex h-10 items-center justify-end gap-4 text-[0.8125rem] sm:justify-between">
+    <p class="hidden truncate sm:block">Music academy in Kolkata <span class="text-ivory/40">&amp;</span> online</p>
+    <ul class="flex shrink-0 items-center gap-5">
+      {CONTACT.phone && (
+        <li><a href={`tel:${CONTACT.phone}`} class="inline-flex items-center gap-1.5 hover:text-ivory"><Phone className="h-3.5 w-3.5" aria-hidden="true" />{CONTACT.phoneDisplay}</a></li>
+      )}
+      {wa && (
+        <li><a href={wa} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 hover:text-ivory"><WhatsAppIcon class="h-3.5 w-3.5" />WhatsApp</a></li>
+      )}
+    </ul>
+  </div>
+</div>
+
+<header id="site-header" class="sticky top-0 z-50 border-b border-line bg-ivory/95 text-midnight backdrop-blur-md transition-shadow data-[scrolled=true]:shadow-[0_8px_30px_-18px_rgba(21,26,35,0.45)]">
+  <div class="wrap flex h-[4.75rem] items-center justify-between gap-6">
+    <a href="/" aria-label="Muzicks — home" class="shrink-0"><Logo light={false} /></a>
 
     <nav aria-label="Main" class="hidden lg:block">
-      <ul class="flex items-center gap-1 text-[0.95rem]">
-        {MAIN_NAV.map((item) => (
-          <li class="group relative">
-            <a
-              href={item.href}
-              aria-current={isActive(item.href) ? 'page' : undefined}
-              class:list={[
-                'inline-flex items-center gap-1 rounded-full px-3.5 py-2 transition-colors',
-                isActive(item.href) ? 'text-brass' : 'text-ivory/80 hover:text-ivory',
-              ]}
-            >
-              {item.label}
-              {item.children && <ChevronDown className="h-3.5 w-3.5 opacity-70" aria-hidden="true" />}
-            </a>
-            {item.children && (
-              <div class="invisible absolute left-0 top-full pt-2 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                <ul class="min-w-[15rem] rounded-2xl bg-midnight-2 p-2 shadow-2xl ring-1 ring-white/10">
-                  {item.children.map((c) => (
-                    <li>
-                      <a href={c.href} class="block rounded-xl px-4 py-2.5 text-ivory/85 hover:bg-white/5 hover:text-ivory">{c.label}</a>
-                    </li>
+      <ul class="flex items-center gap-1">
+        <!-- Academy with mega menu -->
+        <li class="group static">
+          <a
+            href="/academy/"
+            aria-current={academyActive ? 'page' : undefined}
+            class="relative inline-flex items-center gap-1.5 px-4 py-3 text-[1.02rem] font-semibold"
+          >
+            <span class:list={['h-1.5 w-1.5 rounded-full bg-brass', academyActive ? 'opacity-100' : 'opacity-60']} aria-hidden="true"></span>
+            Academy
+            <ChevronDown className="h-4 w-4 opacity-60 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" aria-hidden="true" />
+            <span class:list={['absolute inset-x-4 -bottom-[1.05rem] h-0.5 bg-brass transition-opacity', academyActive ? 'opacity-100' : 'opacity-0']} aria-hidden="true"></span>
+          </a>
+          <div class="invisible absolute inset-x-0 top-full border-t border-line bg-ivory opacity-0 shadow-[0_30px_60px_-30px_rgba(21,26,35,0.35)] transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+            <div class="wrap grid grid-cols-[1fr_1fr_1.1fr] gap-12 py-10">
+              <div>
+                <p class="kicker text-brass-deep">Instrumental</p>
+                <ul class="mt-4 grid grid-cols-2 gap-x-6 gap-y-1">
+                  {INSTRUMENTAL.map((c) => (
+                    <li><a href={`/courses/${c.slug}/`} class="block py-1.5 text-[1.05rem] hover:text-brass-deep">{c.name}</a></li>
                   ))}
                 </ul>
               </div>
-            )}
+              <div>
+                <p class="kicker text-brass-deep">Vocal</p>
+                <ul class="mt-4 space-y-1">
+                  {VOCAL.map((c) => (
+                    <li><a href={`/courses/${c.slug}/`} class="block py-1.5 text-[1.05rem] hover:text-brass-deep">{c.name}</a></li>
+                  ))}
+                </ul>
+                <div class="mt-6 flex gap-5 text-[0.95rem]">
+                  <a href="/academy/" class="link-underline font-semibold decoration-brass">About the Academy</a>
+                  <a href="/courses/" class="link-underline font-semibold decoration-brass">All courses</a>
+                </div>
+              </div>
+              <div class="rounded-2xl bg-midnight p-7 text-ivory">
+                <p class="font-[family-name:var(--font-display)] text-3xl leading-tight">Not sure where to start?</p>
+                <p class="mt-2 text-mist">Tell us about the learner and we will suggest the right course and level — for children and adults.</p>
+                <a href="/contact/?type=course" class="btn btn-brass mt-5 !min-h-11">{OFFERS_DEMO_CLASS ? 'Book a demo class' : 'Ask for a recommendation'}</a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        {verticals.map((v) => (
+          <li>
+            <a
+              href={v.href}
+              aria-current={isActive(v.href) ? 'page' : undefined}
+              class="relative inline-flex items-center gap-1.5 px-4 py-3 text-[1.02rem] font-semibold"
+            >
+              <span class:list={['h-1.5 w-1.5 rounded-full', v.accent, isActive(v.href) ? 'opacity-100' : 'opacity-60']} aria-hidden="true"></span>
+              {v.label}
+              <span class:list={['absolute inset-x-4 -bottom-[1.05rem] h-0.5 transition-opacity', v.accent, isActive(v.href) ? 'opacity-100' : 'opacity-0']} aria-hidden="true"></span>
+            </a>
+          </li>
+        ))}
+
+        <li class="mx-3 h-5 w-px bg-line" aria-hidden="true"></li>
+
+        {secondary.map((s) => (
+          <li>
+            <a
+              href={s.href}
+              aria-current={isActive(s.href) ? 'page' : undefined}
+              class:list={['px-3 py-3 text-[0.98rem] transition-colors', isActive(s.href) ? 'text-midnight font-semibold' : 'text-stone hover:text-midnight']}
+            >{s.label}</a>
           </li>
         ))}
       </ul>
     </nav>
 
     <div class="flex items-center gap-2">
-      {wa && (
-        <a href={wa} target="_blank" rel="noopener" class="hidden sm:inline-flex h-11 w-11 items-center justify-center rounded-full text-ivory/85 ring-1 ring-inset ring-ivory/20 hover:text-ivory hover:ring-ivory/50" aria-label="Chat with Muzicks on WhatsApp">
-          <WhatsAppIcon />
-        </a>
-      )}
-      <a href="/contact/" class="btn btn-brass hidden sm:inline-flex !min-h-11 !px-5 text-[0.95rem]">Enquire now</a>
+      <a href="/contact/" class="btn btn-dark hidden sm:inline-flex !min-h-11 !px-6 text-[0.95rem]">Enquire now</a>
       <button
         type="button"
         id="nav-toggle"
-        class="inline-flex h-11 w-11 items-center justify-center rounded-full ring-1 ring-inset ring-ivory/20 lg:hidden"
+        class="inline-flex h-11 items-center gap-2 rounded-full px-4 font-semibold ring-1 ring-inset ring-line hover:ring-midnight/40 lg:hidden"
         aria-expanded="false"
         aria-controls="mobile-nav"
-        aria-label="Open menu"
       >
+        <span data-label>Menu</span>
         <Menu className="h-5 w-5" data-icon="open" aria-hidden="true" />
         <X className="hidden h-5 w-5" data-icon="close" aria-hidden="true" />
       </button>
     </div>
   </div>
 
-  <nav id="mobile-nav" aria-label="Mobile" class="hidden lg:hidden border-t border-white/10 bg-midnight max-h-[calc(100dvh-4.5rem)] overflow-y-auto">
-    <ul class="wrap py-4">
-      {MAIN_NAV.map((item) => (
-        <li class="border-b border-white/10 last:border-0">
-          <a href={item.href} class:list={['block py-4 font-[family-name:var(--font-display)] text-3xl', isActive(item.href) ? 'text-brass' : 'text-ivory']}>{item.label}</a>
-          {item.children && (
-            <ul class="-mt-2 mb-4 grid grid-cols-2 gap-x-4 gap-y-1 text-ivory/75">
-              {item.children.slice(2).map((c) => (
-                <li><a href={c.href} class="block py-1.5">{c.label}</a></li>
-              ))}
-            </ul>
-          )}
+  <!-- Mobile menu -->
+  <nav id="mobile-nav" aria-label="Mobile" class="hidden border-t border-line bg-ivory lg:hidden max-h-[calc(100dvh-4.75rem)] overflow-y-auto overscroll-contain">
+    <div class="wrap py-6">
+      <ul class="space-y-2">
+        <li class="rounded-2xl bg-sand p-5">
+          <a href="/academy/" class="flex items-center gap-2 font-[family-name:var(--font-display)] text-[2rem] font-semibold leading-none">
+            <span class="h-2 w-2 rounded-full bg-brass" aria-hidden="true"></span>Academy
+          </a>
+          <div class="mt-4 grid grid-cols-2 gap-x-4">
+            <div>
+              <p class="text-sm font-semibold text-brass-deep">Instrumental</p>
+              <ul class="mt-1">{INSTRUMENTAL.map((c) => <li><a href={`/courses/${c.slug}/`} class="block py-1.5">{c.name}</a></li>)}</ul>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-brass-deep">Vocal</p>
+              <ul class="mt-1">{VOCAL.map((c) => <li><a href={`/courses/${c.slug}/`} class="block py-1.5">{c.name}</a></li>)}</ul>
+              <a href="/courses/" class="mt-2 block py-1.5 font-semibold underline underline-offset-4 decoration-brass">All courses</a>
+            </div>
+          </div>
         </li>
-      ))}
-    </ul>
-    <div class="wrap flex flex-col gap-3 pb-8">
-      <a href="/contact/" class="btn btn-brass w-full">Enquire now</a>
-      {wa && (
-        <a href={wa} target="_blank" rel="noopener" class="btn btn-outline-light w-full"><WhatsAppIcon /> WhatsApp us</a>
-      )}
+        {verticals.map((v) => (
+          <li>
+            <a href={v.href} class="flex items-center gap-2 rounded-2xl px-5 py-4 font-[family-name:var(--font-display)] text-[2rem] font-semibold leading-none ring-1 ring-inset ring-line">
+              <span class:list={['h-2 w-2 rounded-full', v.accent]} aria-hidden="true"></span>{v.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <ul class="mt-6 flex flex-wrap gap-x-6 gap-y-2 px-1 text-lg">
+        {secondary.map((s) => <li><a href={s.href} class="text-stone hover:text-midnight">{s.label}</a></li>)}
+      </ul>
+      <div class="mt-8 grid gap-3 sm:grid-cols-2">
+        <a href="/contact/" class="btn btn-dark w-full">Enquire now</a>
+        {wa && <a href={wa} target="_blank" rel="noopener" class="btn btn-outline-dark w-full"><WhatsAppIcon /> WhatsApp us</a>}
+      </div>
     </div>
   </nav>
 </header>
 
 <script>
+  const header = document.getElementById('site-header');
   const btn = document.getElementById('nav-toggle');
   const panel = document.getElementById('mobile-nav');
+
+  // Soft shadow once the page has scrolled under the header
+  if (header) {
+    const onScroll = () => header.setAttribute('data-scrolled', String(window.scrollY > 48));
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
   if (btn && panel) {
     const set = (open: boolean) => {
       panel.classList.toggle('hidden', !open);
       btn.setAttribute('aria-expanded', String(open));
-      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      const label = btn.querySelector('[data-label]');
+      if (label) label.textContent = open ? 'Close' : 'Menu';
       btn.querySelector('[data-icon="open"]')?.classList.toggle('hidden', open);
       btn.querySelector('[data-icon="close"]')?.classList.toggle('hidden', !open);
       document.body.style.overflow = open ? 'hidden' : '';
+      if (open) header?.scrollIntoView({ block: 'start' });
     };
     btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
     document.addEventListener('keydown', (e) => e.key === 'Escape' && set(false));
