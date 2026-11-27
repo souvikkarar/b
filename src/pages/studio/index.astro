@@ -20,24 +20,22 @@ const anyConfirmed = FACILITIES.some((f) => f.confirmed);
   whatsappKind="studio"
 >
   <!-- Hero -->
-  <section class="bg-teal-deep text-ivory">
-    <div class="wrap grid items-end gap-10 pb-16 pt-8 sm:pt-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:pb-20">
-      <div>
-        <Breadcrumbs items={crumbs} light />
-        <p class="kicker mt-10 text-[#8fd3c9]">Create</p>
-        <h1 class="display-lg mt-3">Muzicks Creative Spaces</h1>
-        <p class="lead mt-6 max-w-xl text-ivory/85">
-          Rooms to practise, rehearse and jam — for independent musicians, singers, bands and anyone who wants a place to make music with others.
-        </p>
-        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a href="#enquire" class="btn bg-ivory text-teal-deep hover:bg-white">Explore studio booking</a>
-          {wa && <a href={wa} target="_blank" rel="noopener" class="btn btn-outline-light">Ask on WhatsApp</a>}
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-3">
-        <div class="overflow-hidden rounded-[1.5rem] row-span-2"><Img image="rehearsal" ratio={3 / 4} eager widths={[400, 700]} sizes="(min-width:1024px) 22vw, 50vw" class="h-full w-full" /></div>
-        <div class="overflow-hidden rounded-[1.5rem]"><Img image="mixer" ratio={1} widths={[300, 500]} sizes="(min-width:1024px) 22vw, 50vw" class="h-full w-full" /></div>
-        <div class="overflow-hidden rounded-[1.5rem]"><Img image="drums" ratio={1} widths={[300, 500]} sizes="(min-width:1024px) 22vw, 50vw" class="h-full w-full" /></div>
+  <!-- Light photographic background under an off-white overlay -->
+  <section class="relative isolate overflow-hidden text-midnight">
+    <div class="absolute inset-0 -z-10" aria-hidden="true">
+      <Img image="rehearsal" alt="" ratio={16 / 9} eager widths={[800, 1400, 2000]} sizes="100vw" class="h-full w-full" />
+      <div class="absolute inset-0 bg-gradient-to-r from-ivory via-ivory/90 to-ivory/70"></div>
+    </div>
+    <div class="wrap pb-20 pt-8 sm:pt-10 lg:pb-28">
+      <Breadcrumbs items={crumbs} />
+      <p class="kicker mt-16 text-teal-deep sm:mt-24">Create</p>
+      <h1 class="display-xl mt-3 max-w-4xl">Muzicks Creative Spaces</h1>
+      <p class="lead mt-6 max-w-xl text-midnight/80">
+        Rooms to practise, rehearse and jam — for independent musicians, singers, bands and anyone who wants a place to make music with others.
+      </p>
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+        <a href="#enquire" class="btn btn-teal">Explore studio booking</a>
+        {wa && <a href={wa} target="_blank" rel="noopener" class="btn btn-outline-dark bg-ivory/60">Ask on WhatsApp</a>}
       </div>
     </div>
   </section>
