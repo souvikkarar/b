@@ -13,8 +13,8 @@ const wa = whatsappLink('general');
 
 /** The three business verticals lead the navigation, each with its own accent. */
 const verticals = [
-  { label: 'Concerts', href: '/concerts/', accent: 'bg-ember', text: 'text-ember' },
-  { label: 'Studio', href: '/studio/', accent: 'bg-teal', text: 'text-teal-deep' },
+  { label: 'Concerts', href: '/concerts/', accent: 'bg-ember' },
+  { label: 'Studio', href: '/studio/', accent: 'bg-teal' },
 ];
 const secondary = [
   { label: 'About', href: '/about/' },
@@ -25,55 +25,55 @@ const secondary = [
 
 <!-- Utility strip (scrolls away) -->
 <div class="bg-midnight text-ivory/75">
-  <div class="wrap flex h-10 items-center justify-end gap-4 text-[0.8125rem] sm:justify-between">
+  <div class="wrap flex h-8 items-center justify-end gap-4 text-[0.78rem] sm:justify-between">
     <p class="hidden truncate sm:block">Music academy in Kolkata <span class="text-ivory/40">&amp;</span> online</p>
     <ul class="flex shrink-0 items-center gap-5">
       {CONTACT.phone && (
-        <li><a href={`tel:${CONTACT.phone}`} class="inline-flex items-center gap-1.5 hover:text-ivory"><Phone className="h-3.5 w-3.5" aria-hidden="true" />{CONTACT.phoneDisplay}</a></li>
+        <li><a href={`tel:${CONTACT.phone}`} class="inline-flex items-center gap-1.5 hover:text-ivory"><Phone className="h-3 w-3" aria-hidden="true" />{CONTACT.phoneDisplay}</a></li>
       )}
       {wa && (
-        <li><a href={wa} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 hover:text-ivory"><WhatsAppIcon class="h-3.5 w-3.5" />WhatsApp</a></li>
+        <li><a href={wa} target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 hover:text-ivory"><WhatsAppIcon class="h-3 w-3" />WhatsApp</a></li>
       )}
     </ul>
   </div>
 </div>
 
 <header id="site-header" class="sticky top-0 z-50 border-b border-line bg-ivory/95 text-midnight backdrop-blur-md transition-shadow data-[scrolled=true]:shadow-[0_8px_30px_-18px_rgba(21,26,35,0.45)]">
-  <div class="wrap flex h-[4.75rem] items-center justify-between gap-6">
-    <a href="/" aria-label="Muzicks — home" class="shrink-0"><Logo light={false} /></a>
+  <div class="wrap flex h-14 items-center justify-between gap-6 lg:h-16">
+    <a href="/" aria-label="Muzicks — home" class="shrink-0"><Logo light={false} compact /></a>
 
-    <nav aria-label="Main" class="hidden lg:block">
-      <ul class="flex items-center gap-1">
+    <nav aria-label="Main" class="hidden self-stretch lg:block">
+      <ul class="flex h-full items-stretch gap-1">
         <!-- Academy with mega menu -->
-        <li class="group static">
+        <li class="group static flex">
           <a
             href="/academy/"
             aria-current={academyActive ? 'page' : undefined}
-            class="relative inline-flex items-center gap-1.5 px-4 py-3 text-[1.02rem] font-semibold"
+            class="relative inline-flex items-center gap-1.5 px-4 text-[0.98rem] font-semibold"
           >
             <span class:list={['h-1.5 w-1.5 rounded-full bg-brass', academyActive ? 'opacity-100' : 'opacity-60']} aria-hidden="true"></span>
             Academy
             <ChevronDown className="h-4 w-4 opacity-60 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" aria-hidden="true" />
-            <span class:list={['absolute inset-x-4 -bottom-[1.05rem] h-0.5 bg-brass transition-opacity', academyActive ? 'opacity-100' : 'opacity-0']} aria-hidden="true"></span>
+            <span class:list={['absolute inset-x-4 -bottom-px h-0.5 bg-brass transition-opacity', academyActive ? 'opacity-100' : 'opacity-0']} aria-hidden="true"></span>
           </a>
           <div class="invisible absolute inset-x-0 top-full border-t border-line bg-ivory opacity-0 shadow-[0_30px_60px_-30px_rgba(21,26,35,0.35)] transition-[opacity,visibility] duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-            <div class="wrap grid grid-cols-[1fr_1fr_1.1fr] gap-12 py-10">
+            <div class="wrap grid grid-cols-[1fr_1fr_1.1fr] gap-12 py-9">
               <div>
                 <p class="kicker text-brass-deep">Instrumental</p>
-                <ul class="mt-4 grid grid-cols-2 gap-x-6 gap-y-1">
+                <ul class="mt-3 grid grid-cols-2 gap-x-6">
                   {INSTRUMENTAL.map((c) => (
-                    <li><a href={`/courses/${c.slug}/`} class="block py-1.5 text-[1.05rem] hover:text-brass-deep">{c.name}</a></li>
+                    <li><a href={`/courses/${c.slug}/`} class="block py-1.5 text-[1.02rem] hover:text-brass-deep">{c.name}</a></li>
                   ))}
                 </ul>
               </div>
               <div>
                 <p class="kicker text-brass-deep">Vocal</p>
-                <ul class="mt-4 space-y-1">
+                <ul class="mt-3">
                   {VOCAL.map((c) => (
-                    <li><a href={`/courses/${c.slug}/`} class="block py-1.5 text-[1.05rem] hover:text-brass-deep">{c.name}</a></li>
+                    <li><a href={`/courses/${c.slug}/`} class="block py-1.5 text-[1.02rem] hover:text-brass-deep">{c.name}</a></li>
                   ))}
                 </ul>
-                <div class="mt-6 flex gap-5 text-[0.95rem]">
+                <div class="mt-5 flex gap-5 text-[0.95rem]">
                   <a href="/academy/" class="link-underline font-semibold decoration-brass">About the Academy</a>
                   <a href="/courses/" class="link-underline font-semibold decoration-brass">All courses</a>
                 </div>
@@ -88,27 +88,27 @@ const secondary = [
         </li>
 
         {verticals.map((v) => (
-          <li>
+          <li class="flex">
             <a
               href={v.href}
               aria-current={isActive(v.href) ? 'page' : undefined}
-              class="relative inline-flex items-center gap-1.5 px-4 py-3 text-[1.02rem] font-semibold"
+              class="relative inline-flex items-center gap-1.5 px-4 text-[0.98rem] font-semibold"
             >
               <span class:list={['h-1.5 w-1.5 rounded-full', v.accent, isActive(v.href) ? 'opacity-100' : 'opacity-60']} aria-hidden="true"></span>
               {v.label}
-              <span class:list={['absolute inset-x-4 -bottom-[1.05rem] h-0.5 transition-opacity', v.accent, isActive(v.href) ? 'opacity-100' : 'opacity-0']} aria-hidden="true"></span>
+              <span class:list={['absolute inset-x-4 -bottom-px h-0.5 transition-opacity', v.accent, isActive(v.href) ? 'opacity-100' : 'opacity-0']} aria-hidden="true"></span>
             </a>
           </li>
         ))}
 
-        <li class="mx-3 h-5 w-px bg-line" aria-hidden="true"></li>
+        <li class="mx-3 my-auto h-5 w-px bg-line" aria-hidden="true"></li>
 
         {secondary.map((s) => (
-          <li>
+          <li class="flex">
             <a
               href={s.href}
               aria-current={isActive(s.href) ? 'page' : undefined}
-              class:list={['px-3 py-3 text-[0.98rem] transition-colors', isActive(s.href) ? 'text-midnight font-semibold' : 'text-stone hover:text-midnight']}
+              class:list={['inline-flex items-center px-3 text-[0.95rem] transition-colors', isActive(s.href) ? 'text-midnight font-semibold' : 'text-stone hover:text-midnight']}
             >{s.label}</a>
           </li>
         ))}
@@ -116,85 +116,109 @@ const secondary = [
     </nav>
 
     <div class="flex items-center gap-2">
-      <a href="/contact/" class="btn btn-dark hidden sm:inline-flex !min-h-11 !px-6 text-[0.95rem]">Enquire now</a>
+      <a href="/contact/" class="btn btn-dark hidden sm:inline-flex !min-h-10 !px-5 text-[0.92rem]">Enquire now</a>
       <button
         type="button"
         id="nav-toggle"
-        class="inline-flex h-11 items-center gap-2 rounded-full px-4 font-semibold ring-1 ring-inset ring-line hover:ring-midnight/40 lg:hidden"
+        class="inline-flex h-10 items-center gap-2 rounded-full px-4 text-[0.95rem] font-semibold ring-1 ring-inset ring-line hover:ring-midnight/40 lg:hidden"
         aria-expanded="false"
         aria-controls="mobile-nav"
       >
-        <span data-label>Menu</span>
-        <Menu className="h-5 w-5" data-icon="open" aria-hidden="true" />
-        <X className="hidden h-5 w-5" data-icon="close" aria-hidden="true" />
+        Menu
+        <Menu className="h-5 w-5" aria-hidden="true" />
       </button>
     </div>
   </div>
+</header>
 
-  <!-- Mobile menu -->
-  <nav id="mobile-nav" aria-label="Mobile" class="hidden border-t border-line bg-ivory lg:hidden max-h-[calc(100dvh-4.75rem)] overflow-y-auto overscroll-contain">
-    <div class="wrap py-6">
-      <ul class="space-y-2">
-        <li class="rounded-2xl bg-sand p-5">
-          <a href="/academy/" class="flex items-center gap-2 font-[family-name:var(--font-display)] text-[2rem] font-semibold leading-none">
-            <span class="h-2 w-2 rounded-full bg-brass" aria-hidden="true"></span>Academy
-          </a>
-          <div class="mt-4 grid grid-cols-2 gap-x-4">
-            <div>
-              <p class="text-sm font-semibold text-brass-deep">Instrumental</p>
-              <ul class="mt-1">{INSTRUMENTAL.map((c) => <li><a href={`/courses/${c.slug}/`} class="block py-1.5">{c.name}</a></li>)}</ul>
-            </div>
-            <div>
-              <p class="text-sm font-semibold text-brass-deep">Vocal</p>
-              <ul class="mt-1">{VOCAL.map((c) => <li><a href={`/courses/${c.slug}/`} class="block py-1.5">{c.name}</a></li>)}</ul>
-              <a href="/courses/" class="mt-2 block py-1.5 font-semibold underline underline-offset-4 decoration-brass">All courses</a>
-            </div>
+<!-- Mobile menu: a full-viewport overlay that fits the screen (no scrolling) -->
+<div
+  id="mobile-nav"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menu"
+  class="fixed inset-0 z-[60] hidden h-[100dvh] flex-col bg-ivory text-midnight lg:!hidden"
+>
+  <div class="wrap flex h-14 shrink-0 items-center justify-between border-b border-line">
+    <a href="/" aria-label="Muzicks — home"><Logo light={false} compact /></a>
+    <button
+      type="button"
+      id="nav-close"
+      class="inline-flex h-10 items-center gap-2 rounded-full px-4 text-[0.95rem] font-semibold ring-1 ring-inset ring-line"
+    >
+      Close
+      <X className="h-5 w-5" aria-hidden="true" />
+    </button>
+  </div>
+
+  <nav aria-label="Mobile" class="wrap flex min-h-0 flex-1 flex-col justify-between gap-[clamp(0.75rem,2.2dvh,1.5rem)] py-[clamp(0.75rem,2.5dvh,1.75rem)]">
+    <div class="flex min-h-0 flex-col gap-[clamp(0.5rem,1.4dvh,0.75rem)]">
+      <div class="rounded-2xl bg-sand px-5 py-[clamp(0.75rem,2dvh,1.25rem)]">
+        <a href="/academy/" class="flex items-center gap-2 font-[family-name:var(--font-display)] text-[clamp(1.6rem,3.6dvh,2rem)] font-semibold leading-none">
+          <span class="h-2 w-2 rounded-full bg-brass" aria-hidden="true"></span>Academy
+        </a>
+        <div class="mt-[clamp(0.5rem,1.4dvh,0.9rem)] grid grid-cols-2 gap-x-4 text-[clamp(0.88rem,1.9dvh,1rem)]">
+          <div>
+            <p class="text-[0.8rem] font-semibold text-brass-deep">Instrumental</p>
+            <ul>{INSTRUMENTAL.map((c) => <li><a href={`/courses/${c.slug}/`} class="block py-[clamp(0.15rem,0.55dvh,0.35rem)]">{c.name}</a></li>)}</ul>
           </div>
-        </li>
+          <div>
+            <p class="text-[0.8rem] font-semibold text-brass-deep">Vocal</p>
+            <ul>{VOCAL.map((c) => <li><a href={`/courses/${c.slug}/`} class="block py-[clamp(0.15rem,0.55dvh,0.35rem)] leading-snug">{c.name}</a></li>)}</ul>
+            <a href="/courses/" class="mt-1 block py-[clamp(0.15rem,0.55dvh,0.35rem)] font-semibold underline decoration-brass underline-offset-4">All courses</a>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-[clamp(0.5rem,1.4dvh,0.75rem)]">
         {verticals.map((v) => (
-          <li>
-            <a href={v.href} class="flex items-center gap-2 rounded-2xl px-5 py-4 font-[family-name:var(--font-display)] text-[2rem] font-semibold leading-none ring-1 ring-inset ring-line">
-              <span class:list={['h-2 w-2 rounded-full', v.accent]} aria-hidden="true"></span>{v.label}
-            </a>
-          </li>
+          <a href={v.href} class="flex items-center gap-2 rounded-2xl px-5 py-[clamp(0.7rem,1.9dvh,1.1rem)] font-[family-name:var(--font-display)] text-[clamp(1.4rem,3dvh,1.75rem)] font-semibold leading-none ring-1 ring-inset ring-line">
+            <span class:list={['h-2 w-2 rounded-full', v.accent]} aria-hidden="true"></span>{v.label}
+          </a>
         ))}
-      </ul>
-      <ul class="mt-6 flex flex-wrap gap-x-6 gap-y-2 px-1 text-lg">
+      </div>
+      <ul class="flex flex-wrap gap-x-6 gap-y-1 px-1 text-[clamp(1rem,2.1dvh,1.1rem)]">
         {secondary.map((s) => <li><a href={s.href} class="text-stone hover:text-midnight">{s.label}</a></li>)}
       </ul>
-      <div class="mt-8 grid gap-3 sm:grid-cols-2">
-        <a href="/contact/" class="btn btn-dark w-full">Enquire now</a>
-        {wa && <a href={wa} target="_blank" rel="noopener" class="btn btn-outline-dark w-full"><WhatsAppIcon /> WhatsApp us</a>}
-      </div>
+    </div>
+
+    <div class="grid shrink-0 grid-cols-2 gap-3">
+      <a href="/contact/" class="btn btn-dark !min-h-12 w-full">Enquire now</a>
+      {wa ? (
+        <a href={wa} target="_blank" rel="noopener" class="btn btn-outline-dark !min-h-12 w-full"><WhatsAppIcon /> WhatsApp</a>
+      ) : CONTACT.phone && (
+        <a href={`tel:${CONTACT.phone}`} class="btn btn-outline-dark !min-h-12 w-full">Call us</a>
+      )}
     </div>
   </nav>
-</header>
+</div>
 
 <script>
   const header = document.getElementById('site-header');
-  const btn = document.getElementById('nav-toggle');
-  const panel = document.getElementById('mobile-nav');
+  const openBtn = document.getElementById('nav-toggle');
+  const closeBtn = document.getElementById('nav-close');
+  const overlay = document.getElementById('mobile-nav');
 
   // Soft shadow once the page has scrolled under the header
   if (header) {
-    const onScroll = () => header.setAttribute('data-scrolled', String(window.scrollY > 48));
+    const onScroll = () => header.setAttribute('data-scrolled', String(window.scrollY > 32));
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  if (btn && panel) {
+  if (openBtn && closeBtn && overlay) {
     const set = (open: boolean) => {
-      panel.classList.toggle('hidden', !open);
-      btn.setAttribute('aria-expanded', String(open));
-      const label = btn.querySelector('[data-label]');
-      if (label) label.textContent = open ? 'Close' : 'Menu';
-      btn.querySelector('[data-icon="open"]')?.classList.toggle('hidden', open);
-      btn.querySelector('[data-icon="close"]')?.classList.toggle('hidden', !open);
-      document.body.style.overflow = open ? 'hidden' : '';
-      if (open) header?.scrollIntoView({ block: 'start' });
+      overlay.classList.toggle('hidden', !open);
+      overlay.classList.toggle('flex', open);
+      openBtn.setAttribute('aria-expanded', String(open));
+      document.documentElement.style.overflow = open ? 'hidden' : '';
+      (open ? closeBtn : openBtn).focus();
     };
-    btn.addEventListener('click', () => set(btn.getAttribute('aria-expanded') !== 'true'));
-    document.addEventListener('keydown', (e) => e.key === 'Escape' && set(false));
+    openBtn.addEventListener('click', () => set(true));
+    closeBtn.addEventListener('click', () => set(false));
+    overlay.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !overlay.classList.contains('hidden')) set(false);
+    });
     window.matchMedia('(min-width: 1024px)').addEventListener('change', (e) => e.matches && set(false));
   }
 </script>
